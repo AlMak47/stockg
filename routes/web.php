@@ -16,6 +16,8 @@
 //     return redirect('/login');
 // });
 
+Route::post('/login','Auth\LoginController@login');
+
 // ROUTE D'ADMINISTRATION
 
 Route::middleware(['auth','admin'])->group(function () {

@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\Auth;
-
+use App\Http\Requests\LoginRequest;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 
@@ -35,5 +35,14 @@ class LoginController extends Controller
     public function __construct()
     {
         $this->middleware('guest')->except('logout');
+    }
+
+    public function login(LoginRequest $request) {
+        if ($this->attemptLogin($request)) {
+            return $this->sendLoginResponse($request);
+        }
+        else {
+            return redirect('/login')->with('_errors',"Login data incorrecte");
+        }
     }
 }

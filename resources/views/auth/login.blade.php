@@ -25,7 +25,7 @@
             <!-- <img src="{{asset('img/background.png')}}" alt="" uk-cover> -->
             <div class="uk-position-center uk-position-small">
                 <!-- erroers -->
-                @if($errors->has('username') || $errors->has('password'))
+                @if($errors->has('username') || $errors->has('password') || session('_errors'))
 
                 <div class="uk-alert uk-alert-danger">
                     <p>
@@ -33,6 +33,9 @@
                     </p>
                     <p>
                         {{$errors->first('password')}}
+                    </p>
+                    <p>
+                        {{session('_errors')}}
                     </p>
                 </div>
                 @endif

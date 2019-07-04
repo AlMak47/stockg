@@ -20,7 +20,7 @@ class Kernel extends HttpKernel
         \Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull::class,
         \App\Http\Middleware\TrustProxies::class,
         \App\Http\Middleware\IsAdmin::class,
-        \App\Http\Middleware\IsGerant::class
+        \App\Http\Middleware\isGerant::class
     ];
 
     /**
@@ -60,6 +60,6 @@ class Kernel extends HttpKernel
         'guest' => \App\Http\Middleware\RedirectIfAuthenticated::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'admin' => \App\Http\Middleware\IsAdmin::class,
-        'gerant' => \App\Http\Middleware\IsGerant::class
+        'gerant' => \App\Http\Middleware\isGerant::class
     ];
 }
