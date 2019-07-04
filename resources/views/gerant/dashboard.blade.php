@@ -2,9 +2,32 @@
 
 @section('gerant_contents')
 <div class="uk-container uk-margin-small">
-	<h3 class="uk-h1">Dashboard <span class="uk-align-right uk-h4"><span uk-icon="icon:location;ratio:0.8"></span> {{$boutique}} </span>
+	<h3 class="uk-h1 uk-visible@m">Dashboard <span class="uk-align-right uk-h4"><span uk-icon="icon:location;ratio:0.8"></span> {{$boutique}} </span>
 		<span class="uk-h4 uk-align-right"><span uk-icon="icon:calendar"></span> {{$date}}</span></h3>
-	<div class="uk-child-width-1-2@m" uk-grid>
+	<div class="uk-child-width-1-2@m uk-visible@m" uk-grid>
+		<div>
+			<div class="uk-card uk-card-primary">
+			    <div class="uk-card-header">
+			        <h3 class="uk-card-title uk-text-center">COMMANDES <span uk-icon="icon:cart;ratio:2"></span></h3>
+			    </div>
+			    <div class="uk-card-body">
+			    	<h4 class="uk-h1 uk-text-center">{{$command}}</h4>
+			    </div>
+			</div>
+		</div>
+		<div>
+			<div class="uk-card uk-card-primary">
+			    <div class="uk-card-header">
+			        <h3 class="uk-card-title uk-text-center">CASH (GNF)</h3>
+			    </div>
+			    <div class="uk-card-body">
+			    	<h4 class="uk-h1 uk-text-center">{{$cash}}</h4>
+			    </div>
+			</div>
+		</div>
+	</div>
+
+	<div class="uk-child-width-1-2@m uk-hidden@m uk-margin-xlarge-top" uk-grid>
 		<div>
 			<div class="uk-card uk-card-primary">
 			    <div class="uk-card-header">

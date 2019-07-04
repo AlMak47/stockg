@@ -160,5 +160,11 @@ class ProduitController extends Controller
         $entree->save();
     }
 
+
+    // VERIFICATION DU NIVEAU DANS LE STOCK DES DIFFERENTS PRODUITS
+
+    public function niveauStock () {
+        
+    }
     
 }

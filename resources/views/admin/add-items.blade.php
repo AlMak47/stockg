@@ -30,7 +30,7 @@
 		</div>
 		@endif
 
-		{!!Form::open(['url'=>'admin/add-item','enctype'=>'multipart/form-data'])!!}
+		{!!Form::open(['url'=>'admin/add-item','enctype'=>'multipart/form-data','id'=>'add-form'])!!}
 		<select name="boutiques" class="uk-select">
 			<option value="">--Select Boutique--</option>
 			@foreach($bouti as $values)
@@ -39,10 +39,10 @@
 		</select>
 		{!!Form::hidden('reference','IT'.time())!!}
 		{!!Form::text('libelle',null,['class'=>'uk-input uk-margin-small','placeholder'=>'Item Name','id'=>'item-name'])!!}
-		{!!Form::text('prix_achat',null,['class'=>'uk-input uk-margin-small zone-hide','placeholder'=>'Prix achat'])!!}
-		{!!Form::text('prix_unitaire',null,['class'=>'uk-input uk-margin-small zone-hide','placeholder'=>'Unit Price'])!!}
+		{!!Form::text('prix_achat',0,['class'=>'uk-input uk-margin-small zone-hide','placeholder'=>'Prix achat'])!!}
+		{!!Form::text('prix_unitaire',0,['class'=>'uk-input uk-margin-small zone-hide','placeholder'=>'Unit Price'])!!}
 		{!!Form::number('quantite',null,['class'=>'uk-input uk-margin-small','placeholder'=>'Quantity'])!!}
-		<div>{!!Form::file('image',['class'=>'uk-margin-small zone-hide'])!!}</div>
+		<div>{!!Form::file('image',['class'=>'uk-margin-small'])!!}</div>
 		{!!Form::submit('Envoyer',['class'=>'uk-button uk-button-default'])!!}
 		{!!Form::close()!!}
 		
@@ -71,9 +71,11 @@
 							// le produit existe il faut donc cacher les autres champs
 							$(".zone-hide").hide();
 							$("#info-exist").show(500);
-
+							// $("#img").val('kk');
+							// $("#add-form").removeAttr('enctype');
 						} else if(data && data == 'fail') {
 							// Le produit n'existe pas la procedure habituelle continu
+							// $("#add-form").addAttr('enctype','mulipart/formdata');
 							$(".zone-hide").show();
 						}
 					})

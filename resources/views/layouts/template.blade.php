@@ -11,16 +11,102 @@
 <body>
 
 <nav class="uk-navbar-container uk-box-shadow-small" uk-sticky style="background:rgba(255,255,255,1) !important"  uk-navbar>
+
+
+
+	    <div class="uk-navbar-left uk-hidden@m">
+	        <a class="uk-navbar-toggle" uk-toggle="target: #mobile-menu" href="#">
+	            <span uk-navbar-toggle-icon></span> <span class="uk-margin-small-left">Menu</span>
+	        </a>
+	    </div>
+<!-- OFF CANVAS -->
+	    <div id="mobile-menu" uk-offcanvas="push">
+	        <div class="uk-offcanvas-bar">
+
+	            <!-- <button class="uk-offcanvas-close" type="button" uk-close></button> -->
+	            <ul class="uk-nav uk-nav-default">
+		            <li><a href="{{url('/')}}"><span uk-icon="icon:home"></span> Dashboard</a></li>
+			                @if(Auth::user()->statut!=="gerant")
+			        <li class="uk-parent">
+			            <a href="#"><span uk-icon="icon:thumbnails"></span> Produits</a>
+			            <ul class="uk-nav-sub">
+			            	  <!-- RESERVER A L'AMINISTRATEUR -->
+			                <li><a href="{{url('admin/add-item')}}"><span uk-icon="icon:plus"></span> Add</a></li>
+			                <li><a href="{{url('admin/list-item')}}"><span uk-icon="icon:list"></span> List</a></li>
+			            </ul>
+			        </li>
+			                @endif
+			        <li class="uk-parent">
+			            <a href="#"><span uk-icon="icon:grid"></span> Command</a>
+			            <ul class="uk-nav-sub">
+			            	<!-- USERS ONLY -->
+			            	@if(Auth::user()->statut==="gerant")
+			                <li><a href="{{url('gerant/command/add')}}"><span uk-icon="icon:plus"></span> Add</a></li>
+			                <li><a href="{{url('gerant/command/list')}}"><span uk-icon="icon:list"></span> List</a></li>
+			                @endif
+			                <!-- // -->
+			                @if(Auth::user()->statut!=="gerant")
+			                <li><a href="{{url('admin/list-command')}}"><span uk-icon="icon:list"></span> List</a></li>
+			                @endif
+			            </ul>
+			        </li>
+			        <!-- ADMIN ONLY -->
+			        @if(Auth::user()->statut!=="gerant")
+			        <li class="uk-parent">
+			            <a href="#"><span uk-icon="icon:users"></span> Gerants</a>
+			            <ul class="uk-nav-sub">
+			                <li><a href="{{url('/admin/list-gerant')}}"><span uk-icon="icon:list"></span> List</a></li>
+			                <li><a href="{{url('/admin/add-gerant')}}"><span uk-icon="icon:plus"></span> Add</a></li>
+			            </ul>
+			        </li>
+			        <li class="uk-parent">
+			        	<a href="#"><span uk-icon="icon:history"></span> Bilan</a>
+			        	<ul class="uk-nav-sub">
+			        		<li><a href="{{url('admin/bilan')}}"><span uk-icon="icon:minus"></span> Voir le bilan</a></li>
+			        		<li><a href="{{url('admin/entree')}}"><span uk-icon="icon:minus"></span> Liste des entrees</a></li>
+			        	</ul>
+			        </li>
+			        @endif
+			        <!-- // -->
+
+			        <li class="uk-parent">
+			            <a href="#"><span uk-icon="icon:settings"></span> Parametres</a>
+			            <ul class="uk-nav-sub">
+			            	<!-- USERS ONLY -->
+			            	@if(Auth::user()->statut==="gerant")
+			                <li><a href="{{url('gerant/profile')}}"><span uk-icon="icon:user"></span> Profile</a></li>
+			                @endif
+			                @if(Auth::user()->statut!=="gerant")
+			                <li><a href="{{url('admin/profile')}}"><span uk-icon="icon:user"></span> Profile</a></li>
+			                @endif
+			                {!!Form::open(['url'=>'/logout'])!!}
+			                <li><button type="submit" class="uk-button uk-button-link" href="{{url('logout')}}"><span uk-icon="icon:sign-out"></span> Logout</button></li>
+			                {!!Form::close()!!}
+			            </ul>
+			        </li>
+		        </ul>
+
+	        </div>
+	    </div>
+<!-- // -->
     <div class="uk-navbar-left">
         <ul class="uk-navbar-nav">
-            <li><a><img src="{{asset('img/logo.png')}}" class="uk-width-small" uk-img></span><span class="uk-text-lead">STOCKG</span></a></li>
+            <li><a>
+            	<span class="uk-visible@m"><img src="{{asset('img/logo.png')}}" class="uk-width-small" uk-img></span>
+            	<!-- <span class="uk-hidden@m"><img src="{{asset('img/logo.png')}}" class="" width="50" uk-img></span> -->
+            	<span class="uk-text-lead uk-visible@m">STOCKG</span>
+            </a></li>
         </ul>
     </div>
     <div class="uk-navbar-right uk-dark">
     	<ul class="uk-navbar-nav">
     		<!-- USER ONLY -->
     		@if(Auth::user()->statut==="gerant")
-    		<li><a id="command-en-cours" href="#panier-content" uk-toggle> <span uk-icon="icon:cart"> Commande en cours </span> <span id="panier" class="uk-badge"></span></a></li>
+    		<li>
+    			<a id="command-en-cours" href="#panier-content" uk-toggle> <span uk-icon="icon:cart"><span class="uk-visible@m">Command en cours</span></span> 
+    				<span id="panier" class="uk-badge"></span>
+    			</a>
+    		</li>
     		@endif
     		<!-- // -->
     		<li><a><span uk-icon="icon:bell"></span></a></li>
@@ -32,7 +118,7 @@
 <div class="">
 	<div class="">
 		<div class="" uk-grid>
-			<div class="uk-width-1-4@m uk-box-shadow-small uk-position-fixed" uk-height-viewport="offset-bottom: 11" style="">
+			<div class="uk-width-1-4@m uk-box-shadow-small uk-position-fixed  uk-visible@m" uk-height-viewport="offset-bottom: 11" style="">
 				<ul class="uk-nav-default uk-padding uk-nav-parent-icon" uk-nav>
 					<li class="uk-nav-header">Navigation</li>
 					<li><a href="{{url('/')}}"><span uk-icon="icon:home"></span> Dashboard</a></li>
