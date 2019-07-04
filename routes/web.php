@@ -12,13 +12,14 @@
 */
 
 
-Route::get('/',function () {
-    return redirect('/login');
-});
+// Route::get('/',function () {
+//     return redirect('/login');
+// });
 
 // ROUTE D'ADMINISTRATION
 
 Route::middleware(['auth','admin'])->group(function () {
+    
     Route::get('admin/dashboard','AdminController@dashboard');
     Route::get('admin/add-gerant','AdminController@addGerant');
     Route::get('admin/list-gerant','AdminController@listGerant');

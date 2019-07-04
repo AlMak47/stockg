@@ -89,7 +89,9 @@
 			                @if(Auth::user()->statut!=="gerant")
 			                <li><a href="{{url('admin/profile')}}"><span uk-icon="icon:user"></span> Profile</a></li>
 			                @endif
-			                <li><a href="{{url('logout')}}"><span uk-icon="icon:sign-out"></span> Logout</a></li>
+			                {!!Form::open(['url'=>'/logout'])!!}
+			                <li><button type="submit" class="uk-button uk-button-link" href="{{url('logout')}}"><span uk-icon="icon:sign-out"></span> Logout</button></li>
+			                {!!Form::close()!!}
 			            </ul>
 			        </li>
 			        

@@ -27,7 +27,6 @@
 	            <th>Verouiller</th>
 	        </tr>
 	    </thead>
-	    {{dd($boutique)}}
 	    <tbody>
 	    		@foreach($ulist as $values)
 	    	<tr>
