@@ -19,8 +19,8 @@ class CreateProduits extends Migration
             $table->primary('reference');
             $table->string('libelle',255)->unique();
             $table->string('image');
-            $table->float('prix_unitaire');
-            $table->float('prix_achat');
+            $table->float('prix_unitaire',255,2);
+            $table->float('prix_achat',255,2);
             $table->timestamps();
         });
     }
