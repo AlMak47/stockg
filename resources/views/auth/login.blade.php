@@ -48,7 +48,7 @@
                     <div class="uk-card-body">
                         <!-- // -->
                     
-                    {!!Form::open(['url'=>'/login'])!!}
+                    {!!Form::open(['url'=>'/connexion'])!!}
                         {!!Form::text('username',null,['class'=>'uk-input uk-margin-small'])!!}
                         {!!Form::password('password',['class'=>'uk-input uk-margin-small'])!!}
                         {!!Form::submit('Envoyer',['class'=>'uk-button uk-button-primary'])!!}

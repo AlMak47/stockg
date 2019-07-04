@@ -16,7 +16,7 @@
 //     return redirect('/login');
 // });
 
-Route::post('/login','Auth\LoginController@login');
+Route::post('/connexion','Auth\LoginController@connexion');
 
 // ROUTE D'ADMINISTRATION
 
