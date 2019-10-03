@@ -21,7 +21,7 @@ Route::post('/connexion','Auth\LoginController@connexion');
 // ROUTE D'ADMINISTRATION
 
 Route::middleware(['auth','admin'])->group(function () {
-    
+
     Route::get('admin/dashboard','AdminController@dashboard');
     Route::get('admin/add-gerant','AdminController@addGerant');
     Route::get('admin/list-gerant','AdminController@listGerant');
@@ -80,7 +80,7 @@ Route::middleware(['auth','gerant'])->group(function () {
     Route::post('gerant/item/{id}/get-panier','GerantController@getPanierContent');
     Route::post('gerant/command/{code}/get-panier','GerantController@getPanierContent');
     // Route::post('gerant/{item}/{id?}/{code?}','GerantController@getPanierContent');
-    // 
+    //
     Route::post('gerant/dashboard/','GerantController@getPanierDetails');
     Route::post('gerant/command/add/get-details','GerantController@getPanierDetails');
     Route::post('gerant/command/list/get-details','GerantController@getPanierDetails');
@@ -88,7 +88,7 @@ Route::middleware(['auth','gerant'])->group(function () {
     Route::post('gerant/item/details/get-details','GerantController@getPanierDetails');
     Route::post('gerant/item/{id}/get-details','GerantController@getPanierDetails');
     Route::post('gerant/command/{code}/get-details','GerantController@getPanierDetails');
-    
+
     // finalisation de la commande
     Route::post('gerant/command/finalise','GerantController@confirmCommand');
     Route::post('gerant/item/finalise','GerantController@confirmCommand');
