@@ -43,14 +43,18 @@ Route::middleware(['auth','admin'])->group(function () {
     Route::post('admin/list-item/search-item','ProduitController@searchItem');
     // FILTRAGE PAR DATE
     Route::post('admin/list-command/filter-by-date','AdminController@filterByDate');
+
     Route::get('admin/bilan','AdminController@bilan');
     Route::post('admin/bilan','AdminController@bilanByBoutique');
+    Route::post('/admin/bilan/by-date','AdminController@filtrerByDate');
+
     Route::get('admin/entree','AdminController@listEntree');
     Route::post('admin/entree','AdminController@getListEntree');
     Route::get('admin/edit-item/{id}','AdminController@editItem');
     Route::post('admin/edit-item/{id}','AdminController@makeEditItem');
     // simplify
     Route::post('admin/add-item/simplify','AdminController@simplify');
+
 });
 
 // /////==========================

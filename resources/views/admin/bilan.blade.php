@@ -25,14 +25,14 @@
 						@endforeach
 					</select>
 				</div>
-			<div>				
+			<div>
 					<h1 class="uk-h5"><span uk-icon="icon:calendar;ratio:0.7"></span> Filter by date</h1>
-					{!!Form::open(['url'=>'admin/list-command/filter-by-date','class'=>'uk-grid-small','uk-grid','id'=>'filter-date'])!!}			
+					{!!Form::open(['url'=>'/admin/bilan/by-date','class'=>'uk-grid-small','uk-grid','id'=>'filter-date'])!!}
 					<div class="uk-width-2-5@s">
-						{!!Form::text('date_depart',null,['class'=>'uk-input select_date','placeholder'=>'Du'])!!}
+						{!!Form::text('date_depart',null,['class'=>'uk-input select_date','placeholder'=>'Du','id'=>'date_depart'])!!}
 					</div>
 					<div class="uk-width-2-5@s">
-						{!!Form::text('date_fin',null,['class'=>'uk-input select_date','placeholder'=>'Au'])!!}
+						{!!Form::text('date_fin',null,['class'=>'uk-input select_date','placeholder'=>'Au','id'=>'date_fin'])!!}
 					</div>
 					<div class="uk-width-1-5@s">
 					{!!Form::submit('Ok',['class'=>'uk-button uk-button-default'])!!}
@@ -63,10 +63,10 @@
 				</div>
 			</div>
 			<div>
-				
+
 			</div>
 		</div>
-		
+
 </div>
 <!-- <input type="hidden" id="token" value="{{csrf_token()}}"> -->
 @endsection
@@ -74,10 +74,33 @@
 <script type="text/javascript">
 
 	$(function() {
-		
+
 		$('.select_date').datepicker({
 			  dateFormat: "yy-mm-dd"
 			});
+
+			// filtrer par interval de date
+			var _form = $("#filter-date")
+
+			_form.on('submit',function (e) {
+				e.preventDefault()
+
+				$.ajax({
+					url : $(this).attr('action'),
+					type : 'post',
+					dataType : 'json',
+					data : $(this).serialize() + "&boutique=" + $("#filter-by-boutique").val()
+				})
+				.done(function (data) {
+					$("#in-stock").html(data.inStock);
+					$("#vendu").html(data.vendu);
+					$("#interet").html(data.interet);
+					$("#entree").html(data.entree);
+				})
+				.fail(function (data) {
+					console.log(data)
+				})
+			})
 
 		// FILTRER LE BILAN PAR BOUTIQUE
 
@@ -115,7 +138,7 @@
 		$(document).ajaxSuccess(function () {
 			$(".loading").hide();
 		})
-		// 
+		//
 		$(".c-values > div").addClass('uk-padding-small');
 	});
 </script>

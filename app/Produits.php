@@ -8,6 +8,8 @@ class Produits extends Model
 {
     //
     protected $table = 'produits';
+    protected $keyType = 'string';
+    protected $primaryKey = 'reference';
 
     // public function stockage() {
     // 	return $this->hasOne('App\Stockage','produit','reference');

@@ -29,17 +29,21 @@ class AdminController extends Controller
         $this->daily_cash = $this->cashOfDay();
         $this->date =$this->dateOfDay();
         $this->dayCommand = $this->commandOfDay();
+        $this->shop = $this->_users->count();
+        $this->items = $this->getItemInStock();
     }
 
     public function dashboard() {
     	return view('admin.dashboard')->withUlist($this->_users)
                                 ->withDcash($this->daily_cash)
                                 ->withDate($this->date)
-                                ->withDaycommand($this->dayCommand);
+                                ->withDaycommand($this->dayCommand)
+                                ->withShop($this->shop)
+                                ->withItems($this->items);
     }
     // FORMULAIRE D'AJOUT DE GERANTS
-    public function addGerant() {      
-        // dd($this->date);  
+    public function addGerant() {
+        // dd($this->date);
     	return view('admin.add-gerant')->withDate($this->date);
     }
     // ENVOI DES INFORMATIONS DANS LA BASE DE DONNEES
@@ -51,7 +55,7 @@ class AdminController extends Controller
         $users->statut=$request->input('statut');
         $users->password=bcrypt($request->input('password'));
         $request->session()->put('user',$users);
-       
+
             return view('admin/add-boutique')->with('user',$users)->withDate($this->date);
     }
     // FORMULAIRE D'AJOUT DE BOUTIQUE
@@ -64,12 +68,12 @@ class AdminController extends Controller
         $boutique = new Boutique;
         $boutique->localisation = $request->input('localisation');
         $boutique->users = $request->input('username');
-        if($boutique->users === $request->session()->get('user')->username) {    
+        if($boutique->users === $request->session()->get('user')->username) {
             $request->session()->get('user')->save();
             $boutique->save();
             return redirect('admin/list-gerant')->with('msg','Ajouter avec success');
         }
-        
+
     }
     // AFFICHAGE DE LA LISTE DES GERANTS
     public function listGerant() {
@@ -119,16 +123,16 @@ class AdminController extends Controller
 
     public function detailsItem($id) {
          $item = Produits::select()->where('reference',$id)->first();
-        // recuperation de la quantite en stock 
+        // recuperation de la quantite en stock
         $quantite =0;
         $tmp = Stockage::select()->where('produit',$id)->sum('quantite');
-        
+
         return view('admin.details-item')->withDetails([$item,$tmp]);
     }
-    
+
     public function Profile() {
         return view('admin.profile')->withDate($this->date);
-    }    
+    }
 
     public function changePassword(PasswordChangeRequest $request) {
         if(Hash::check($request->input('old_password'),Auth::user()->password)) {
@@ -138,7 +142,7 @@ class AdminController extends Controller
         }
         return redirect('admin/profile')->with('error','Le Mot de passe ne correspond pas');
     }
-    
+
     public function detailsCommand($code) {
 
         $details = Command::select()->where('code',$code)->first();
@@ -155,7 +159,7 @@ class AdminController extends Controller
                                             ->withBoutique($details->boutique);
     }
 
-    // filtrer par date 
+    // filtrer par date
 
     public function filterByDate(Request $request) {
 
@@ -195,6 +199,12 @@ class AdminController extends Controller
                                 ->withInteret($interet);
     }
 
+    // nombre de produit total en stock
+    public function getItemInStock() {
+      $items = Produits::all();
+      return $items->count();
+    }
+
     // nombre de commande du jour
     public function commandOfDay() {
         $date = $this->dateOfDay();
@@ -205,7 +215,7 @@ class AdminController extends Controller
         return false;
     }
 
-    // calcul du total en stock 
+    // calcul du total en stock
 
     public function totalInStock($boutiqueOption=false,$boutique=null) {
         $quantite =0;
@@ -220,17 +230,17 @@ class AdminController extends Controller
             }
 
         } else {
-            $items = Produits::select()->get();    
+            $items = Produits::select()->get();
             foreach($items as $key => $values) {
                 $quantite = Stockage::select()->where('produit',$values->reference)->sum('quantite');
                 $totalStock += $values->prix_achat * $quantite;
             }
         }
 
-        
+
         return $totalStock;
     }
-    // calcul du total vendu par jour 
+    // calcul du total vendu par jour
     public function totalByDay($boutiqueOption=false,$boutique=null) {
         $cash =0;
 
@@ -239,11 +249,24 @@ class AdminController extends Controller
         } else {
             $items = Command::select()->where('status','confirme')->whereDate('created_at',Carbon::now()->toDateString())->get();
         }
-        
+
         foreach($items as $key => $values) {
             $cash += $this->totalCashCommand($values->code);
         }
         return $cash;
+    }
+    // total vendu dans un interval de date
+    public function totalVenduByDate ($boutique="all",$debut,$fin) {
+      $cash =0 ;
+      if($boutique = "all") {
+        $items = Command::select()->where('status','confirme')->whereBetween('created_at',[$debut,$fin])->get();
+      } else {
+        $items = Command::select()->where('boutique',$boutique)->where('status','confirme')->whereBetween('created_at',[$debut,$fin])->get();
+      }
+      foreach($items as $key => $values) {
+          $cash += $this->totalCashCommand($values->code);
+      }
+      return $cash;
     }
 
     // calcul du benefice
@@ -260,7 +283,22 @@ class AdminController extends Controller
             $items = Command::select()->where('status','confirme')->where('code',$unique)->get();
             // return $interet;
         }
-        
+
+        foreach($items as $key => $values) {
+            $interet += $this->interetCommand($values->code);
+        }
+
+        return $interet;
+    }
+    public function getInteretByDate($boutiqueOption=false,$boutique=null,$debut,$fin) {
+        $interet = 0;
+
+        if($boutiqueOption && $boutique!=null) {
+            $items = Command::select()->where('boutique',$boutique)->where('status','confirme')->whereBetween('created_at',[$debut,$fin])->get();
+        } else {
+            $items = Command::select()->where('status','confirme')->whereBetween('created_at',[$debut,$fin])->get();
+        }
+
         foreach($items as $key => $values) {
             $interet += $this->interetCommand($values->code);
         }
@@ -268,7 +306,7 @@ class AdminController extends Controller
         return $interet;
     }
 
-    // calcul des entrees 
+    // calcul des entrees
     public function getEntree($boutiqueOption=false,$boutique=null) {
 
         $all = Entree::select()->whereDate('created_at',Carbon::now()->toDateString())->get();
@@ -286,6 +324,50 @@ class AdminController extends Controller
 
         return $total;
     }
+    // get entree par date
+
+    public function getEntreeByDate($boutiqueOption=false,$boutique=null,$debut,$fin) {
+
+        $all = Entree::select()->whereBetween('created_at',[$debut,$fin])->get();
+        if($boutiqueOption && $boutique!=null) {
+            $all = Entree::select()->where('boutique',$boutique)->whereBetween('created_at',[$debut,$fin])->get();
+        }
+
+        $total = 0;
+
+        foreach($all as $key => $values) {
+            $item = Produits::select()->where('reference',$values->produit)->first();
+            $vente = $item->prix_achat * $values->quantite;
+            $total+=$vente;
+        }
+
+        return $total;
+    }
+
+    // filtrer le bilan par date
+    public function filtrerByDate(Request $request) {
+      if($request->input('boutique') == "all") {
+        // calcul global
+        $inStock = "N/A";
+        $interet = $this->getInteretByDate(false,null,$request->input('date_depart'),$request->input('date_fin'));
+        $entree = $this->getEntreeByDate(false,null,$request->input("date_depart"),$request->input('date_fin'));
+      } else {
+        // choix de la boutique
+        $inStock = number_format($this->totalInStock(true,$request->input('boutique')));
+        $interet = $this->getInteretByDate(true,$request->input('boutique'),$request->input('date_depart'),$request->input('date_fin'));
+        $entree = $this->getEntreeByDate(true,$request->input('boutique'),$request->input("date_depart"),$request->input('date_fin'));
+
+      }
+      $vendu = $this->totalVenduByDate($request->input('boutique'),$request->input('date_depart'),$request->input("date_fin"));
+
+      return response()->json([
+        'inStock' =>  $inStock ,
+        'vendu' =>  number_format($vendu) ,
+        'interet' =>  number_format($interet) ,
+        'entree'  =>  number_format($entree)
+      ]);
+    }
+    // ##
     // FILTRER LE BILAN PAR BOUTIQUE
 
     public function bilanByBoutique(Request $request) {
@@ -295,7 +377,7 @@ class AdminController extends Controller
             $vendu = $this->totalByDay();
             $interet = $this->getInteret();
             $entree = $this->getEntree();
-            
+
         } else {
             // bilan par boutique
             $inStock = $this->totalInStock(true,$request->input('ref'));
@@ -340,12 +422,12 @@ class AdminController extends Controller
         $item = Produits::select()->where('reference',$id)->first();
         // $quantite = Stockage::select()->where('')
         return view('admin.edit-items')->withBouti($boutiques)->withDate($this->date)->withItemedit($item);
-    }    
+    }
 
     public function makeEditItem($id,Request $request) {
 
         if($request->file('image')) {
-            // l'image existe 
+            // l'image existe
         }
         else {
             // l'image n'existe pas
@@ -364,7 +446,7 @@ class AdminController extends Controller
 
     public function simplify(Request $request) {
         if($this->isExistItem($request->input('ref'))) {
-            return response()->json('done');    
+            return response()->json('done');
         }
         return response()->json('fail');
     }
