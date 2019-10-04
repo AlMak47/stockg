@@ -12,9 +12,9 @@
 */
 
 
-// Route::get('/',function () {
-//     return redirect('/login');
-// });
+Route::get('/',function () {
+    return redirect('/login');
+});
 
 Route::post('/connexion','Auth\LoginController@connexion');
 
