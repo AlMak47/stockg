@@ -4,14 +4,10 @@ Add Item
 @endsection
 @section('admin_contents')
 <div class="uk-container">
-	<h3 class="uk-h1">Add to Stock <span class="uk-h4 uk-align-right"><span uk-icon="icon:calendar"></span> {{$date}}</span></h3>
-	<ul class="uk-breadcrumb">
-	    <li><a href=""><span uk-icon="icon:home"></span></a></li>
-	    <li><span>Add to Stock</span></li>
-	</ul>
+	<h3 class="uk-h3">Add Item</h3>
 		<hr class="uk-divider-small">
 
-		<div class="uk-alert uk-alert-info" id="info-exist" style="display: none;">
+		<div class="uk-alert uk-alert-info uk-box-shadow-small uk-border-rounded" id="info-exist" style="display: none;">
 			<p><span uk-icon="icon:info;ratio:1.2"></span> Ce Produit Existe deja ! Pour l'ajouter a un stock , saisissez juste la quantite</p>
 		</div>
 
@@ -20,32 +16,51 @@ Add Item
 			{{session('success')}}
 		</div>
 		@endif
-		<!-- errors messages -->
-		@if($errors->has('boutiques') || $errors->has('libelle') || $errors->has('prix_achat') || $errors->has('prix_unitaire') || $errors->has('quantite') || $errors->has('image'))
+		@if(session('error'))
 		<div class="uk-alert uk-alert-danger">
-			<div>{{$errors->first('libelle')}}</div>
-			<div>{{$errors->first('prix_achat')}}</div>
-			<div>{{$errors->first('prix_unitaire')}}</div>
-			<div>{{$errors->first('quantite')}}</div>
-			<div>{{$errors->first('image')}}</div>
-			<div>{{$errors->first('boutiques')}}</div>
+			{{session('error')}}
 		</div>
 		@endif
-
+		<!-- errors messages -->
+		@if($errors->any())
+		@foreach($errors->all() as $error)
+		<div class="uk-alert-danger uk-box-shadow-small uk-border-rounded" uk-alert>
+			<a href="#" class="uk-alert-close" uk-close></a>
+			<p>{{$error}}</p>
+		</div>
+		@endforeach
+		@endif
+		<div class="uk-alert-info uk-box-shadow-small uk-border-rounded" uk-alert>
+			<a href="#" class="uk-alert-close" uk-close></a>
+			<p>(*) Champs Obligatoires</p>
+		</div>
 		{!!Form::open(['url'=>'admin/add-item','enctype'=>'multipart/form-data','id'=>'add-form'])!!}
-		<select name="boutiques" class="uk-select">
+		{!!Form::label('Shop *')!!}
+		<select name="boutiques" class="uk-select uk-border-rounded">
 			<option value="">--Select Boutique--</option>
 			@foreach($bouti as $values)
 			<option value="{{$values->localisation}}">{{$values->localisation}}</option>
 			@endforeach
 		</select>
 		{!!Form::hidden('reference','IT'.time())!!}
-		{!!Form::text('libelle',null,['class'=>'uk-input uk-margin-small','placeholder'=>'Item Name','id'=>'item-name'])!!}
-		{!!Form::text('prix_achat',0,['class'=>'uk-input uk-margin-small zone-hide','placeholder'=>'Prix achat'])!!}
-		{!!Form::text('prix_unitaire',0,['class'=>'uk-input uk-margin-small zone-hide','placeholder'=>'Unit Price'])!!}
-		{!!Form::number('quantite',null,['class'=>'uk-input uk-margin-small','placeholder'=>'Quantity'])!!}
-		<div>{!!Form::file('image',['class'=>'uk-margin-small'])!!}</div>
-		{!!Form::submit('Envoyer',['class'=>'uk-button uk-button-default'])!!}
+		{!!Form::label('Item Name *')!!}
+		{!!Form::text('libelle',null,['class'=>'uk-input uk-margin-small uk-border-rounded','placeholder'=>'Item Name','id'=>'item-name'])!!}
+		{!!Form::label("Buying Price *")!!}
+		{!!Form::text('prix_achat',0,['class'=>'uk-input uk-margin-small zone-hide uk-border-rounded','placeholder'=>'Prix achat','id'=>'prix-achat'])!!}
+		{!!Form::label("Unit Price *")!!}
+		{!!Form::text('prix_unitaire',0,['class'=>'uk-input uk-margin-small zone-hide uk-border-rounded','placeholder'=>'Unit Price','id'=>'prix-unitaire'])!!}
+		{!!Form::label("Quantity *")!!}
+		{!!Form::number('quantite',null,['class'=>'uk-input uk-margin-small uk-border-rounded','placeholder'=>'Quantity','id'=>'quantity'])!!}
+		<div class="uk-margin-small">
+			{!!Form::label("Select Image *")!!}
+      <div uk-form-custom>
+				{!!Form::file('image')!!}
+          <button class="uk-button-primary uk-padding-small uk-border-circle uk-icon-link" uk-icon="icon:image" type="button" tabindex="-1"></button>
+      </div>
+		</div>
+		<div class="">
+			{!!Form::submit('Envoyer',['class'=>'uk-button uk-button-primary uk-border-rounded uk-box-shadow-small'])!!}
+		</div>
 		{!!Form::close()!!}
 
 </div>
@@ -55,10 +70,7 @@ Add Item
 <script type="text/javascript">
 	$(function() {
 		// traitement de l'ajout du produit
-		$("#item-name").on('keyup',function () {
-
-			// console.log($(this).val());
-			// envoi d'une requete ajax
+		$("#item-name").on('keyup focus blur',function () {
 			var form = $adminPage.makeForm("{{csrf_token()}}","/admin/add-item/simplify",$("#item-name").val());
 				form.on('submit',function (e) {
 					e.preventDefault();
@@ -69,13 +81,16 @@ Add Item
 						dataType : 'json'
 					})
 					.done(function (data) {
-						if(data && data == 'done') {
+						if(data && data !== 'fail') {
+							console.log(data)
 							// le produit existe il faut donc cacher les autres champs
+							$("#prix-achat").val(data.prix_achat)
+							$("#prix-unitaire").val(data.prix_unitaire)
 							$(".zone-hide").hide();
 							$("#info-exist").show(500);
 							// $("#img").val('kk');
 							// $("#add-form").removeAttr('enctype');
-						} else if(data && data == 'fail') {
+						} else {
 							// Le produit n'existe pas la procedure habituelle continu
 							// $("#add-form").addAttr('enctype','mulipart/formdata');
 							$(".zone-hide").show();
@@ -88,6 +103,10 @@ Add Item
 				form.submit();
 
 		});
+
+		$("#add-form").on('submit',function () {
+			UIkit.modal("#loading").show()
+		})
 
 	});
 </script>

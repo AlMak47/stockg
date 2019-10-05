@@ -39,7 +39,8 @@ class GerantController extends Controller
     public function addCommande() {
         // session()->forget('command_en_cours');
         $this->CommandInSession();
-    	return view('gerant.add-commande')->withBoutique($this->getLocalisation()->localisation);
+    	return view('gerant.add-commande')->withBoutique($this->getLocalisation()->localisation)
+        ->withDate($this->dateOfDay());
     }
 
     public function getListItem() {

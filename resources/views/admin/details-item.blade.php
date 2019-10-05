@@ -17,7 +17,7 @@
 		<hr class="uk-divider-small">
 
 		<div class="uk-grid-match uk-child-width-1-2@m" uk-grid>
-			<div><img src="{{asset('uploads/'.$details[0]->image)}}" class="uk-width-medium uk-height-medium uk-animation-kenburns" uk-img></div>	
+			<div><img src="{{asset('uploads/'.$details[0]->image)}}" class="uk-width-medium uk-height-medium uk-animation-kenburns" uk-img></div>
 			<div>
 				<ul class="uk-list uk-list-divider">
 					<li class="uk-text-lead">Reference : {{$details[0]->reference}}</li>
@@ -26,16 +26,16 @@
 					<li  class="uk-text-lead">Buying price (GNF) : <span>{{number_format($details[0]->prix_achat)}}</span></li>
 					<li  class="uk-text-lead">Pieces : {{$details[1]}}</li>
 				</ul>
-			</div>	
+			</div>
 		</div>
-		
+
 <input type="hidden" id="token" value="{{csrf_token()}}">
 @endsection
 @section('admin_script')
 <script type="text/javascript">
 
 	$(function() {
-		
+
 	});
 </script>
 @endsection

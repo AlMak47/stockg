@@ -127,7 +127,7 @@ class AdminController extends Controller
         $quantite =0;
         $tmp = Stockage::select()->where('produit',$id)->sum('quantite');
 
-        return view('admin.details-item')->withDetails([$item,$tmp]);
+        return view('admin.details-item')->withDetails([$item,$tmp])->withDate($this->dateOfDay());
     }
 
     public function Profile() {
@@ -445,8 +445,8 @@ class AdminController extends Controller
     }
 
     public function simplify(Request $request) {
-        if($this->isExistItem($request->input('ref'))) {
-            return response()->json('done');
+        if($item = $this->isExistItem($request->input('ref'))) {
+            return response()->json($item);
         }
         return response()->json('fail');
     }

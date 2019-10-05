@@ -25,13 +25,13 @@ class ProduitRequest extends FormRequest
     {
         return [
             //
-            
+
             'libelle'=>'required|min:3',
             'reference'=>'required|unique:produits',
             'prix_achat'=>'required|numeric',
             'prix_unitaire'=>'required|numeric',
             'quantite'=>'required|numeric',
-            'image'=>'required|image',
+            'image'=>'image',
             'boutiques'=>'required|string|exists:boutique,localisation',
 
         ];

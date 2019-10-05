@@ -1,10 +1,13 @@
 @extends('layouts.app_gerant')
+@section('title')
+Details Item
+@endsection
 
 @section('gerant_contents')
 
 <div class="uk-container">
 	<h3 class="uk-h1">Details Item <span class="uk-align-right uk-h4"><span uk-icon="icon:location;ratio:0.8"></span> {{$boutique}} </span>
-		<span class="uk-h4 uk-align-right">{{$date}}</span></h3>
+		<!-- <span class="uk-h4 uk-align-right">{{$date}}</span></h3> -->
 </div>
 <!-- TOUS LES PRODUITS -->
 
@@ -17,7 +20,7 @@
 		<hr class="uk-divider-small">
 
 		<div class="uk-grid-match uk-child-width-1-2@m" uk-grid>
-			<div><img src="{{asset('uploads/'.$details[0]->image)}}" class="uk-width-small uk-animation-kenburns" uk-img></div>	
+			<div><img src="{{asset('uploads/'.$details[0]->image)}}" class="uk-width-small uk-animation-kenburns" uk-img></div>
 			<div>
 				<ul class="uk-list uk-list-divider">
 					<li>Reference : {{$details[0]->reference}}</li>
@@ -25,9 +28,9 @@
 					<li>Price (GNF) : {{number_format($details[0]->prix_unitaire)}}</li>
 					<li>Pieces : {{$details[1]}}</li>
 				</ul>
-			</div>	
+			</div>
 		</div>
-		
+
 <input type="hidden" id="token" value="{{csrf_token()}}">
 @endsection
 @section('gerant_script')
@@ -40,7 +43,7 @@
 		// RECUPERATION DE LA LISTE DES PRODUITS
 		// $adminPage.getDataFormAjax('all',"{{csrf_token()}}",'',['libelle','quantite','prix_achat','prix_unitaire','photo','edit','details'],$("#list-item"),2);
 		//RECUPERATION DE LA LISTE DES COMMANDES
-		// $adminPage.getListCommand("{{csrf_token()}}","{{url()->current()}}",''); 
+		// $adminPage.getListCommand("{{csrf_token()}}","{{url()->current()}}",'');
 
 		// console.log($("td:empty"));
 		$("#new-command").on('submit',function(e) {
@@ -61,7 +64,7 @@
 		});
 
 		$("#command-en-cours").on('click',function() {
-			$adminPage.detailsPanierOnGerant("{{csrf_token()}}","{{url()->current()}}/"+"get-details");			
+			$adminPage.detailsPanierOnGerant("{{csrf_token()}}","{{url()->current()}}/"+"get-details");
 		});
 	});
 </script>

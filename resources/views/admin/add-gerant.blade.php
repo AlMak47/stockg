@@ -4,7 +4,7 @@ Add Shop
 @endsection
 @section('admin_contents')
 <div class="uk-container">
-	<h3 class="uk-h1">Add User <span class="uk-h4 uk-align-right"><span uk-icon="icon:calendar"></span> {{$date}}</span></h3>
+	<h3 class="uk-h1">Add User </h3>
 	<ul class="uk-breadcrumb">
 	    <li><a href=""><span uk-icon="icon:home"></span></a></li>
 	    <li><span>List users</span></li>
