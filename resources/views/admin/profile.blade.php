@@ -7,24 +7,18 @@ Settings
 @section('admin_contents')
 
 <div class="uk-container">
-	<h3 class="uk-h1">Profile <span class="uk-h4 uk-align-right"><span uk-icon="icon:calendar"></span> {{$date}}</span></h3>
-</div>
-<!-- TOUS LES PRODUITS -->
-
-<div class="uk-container">
-	<ul class="uk-breadcrumb">
-	    <li><a href=""><span uk-icon="icon:home"></span></a></li>
-	    <li><span>Profile</span></li>
-	</ul>
+	<h3 class="uk-h3">Profile</h3>
 
 		<hr class="uk-divider-small">
 
-		<div class="uk-section uk-section-default uk-margin-remove uk-padding-remove">
-			<div class="uk-grid-match uk-child-width-1-2@m" uk-grid>
-				<div class="uk-card">
-					<h3 class="uk-card-header">Profile Infos</h3>
+		<div class="uk-margin-remove uk-padding-remove">
+			<div class="uk-grid-small uk-child-width-1-1@m" uk-grid>
+
+				<div class="">
+				<div class="uk-card uk-card-default uk-border-rounded uk-box-shadow-small">
+					<div class="uk-card-header">Profile Infos</div>
 					<div class="uk-card-body">
-						<a href="" class="uk-button uk-button-link"><span uk-icon="icon:pencil"></span> Edit</a>
+						<!-- <a href="" class="uk-button uk-button-link"><span uk-icon="icon:pencil"></span> Edit</a> -->
 						<ul class="uk-list uk-list-divider">
 							<li><span uk-icon="icon:user;ratio:0.9"></span> Username : {{Auth::user()->username}}</li>
 							<li><span uk-icon="icon:mail;ratio:0.9"></span> Email : {{Auth::user()->email}}</li>
@@ -32,9 +26,11 @@ Settings
 						</ul>
 					</div>
 				</div>
-				<div class=" uk-card">
-					<h3 class="uk-card-header">Change password</h3>
+			</div>
+			<div class="">
 
+				<div class="uk-card uk-card-default uk-border-rounded uk-box-shadow-small">
+					<div class="uk-card-header">Change password</div>
 					<div class="uk-card-body">
 						@if($errors->has('old_password') || $errors->has('new_password'))
 						<div class="uk-alert uk-alert-danger">
@@ -60,10 +56,11 @@ Settings
 						{!!Form::text('old_password','',['class'=>'uk-input uk-margin-small','placeholder'=>'Old Password'])!!}
 						{!!Form::password('new_password',['class'=>'uk-input uk-margin-small','placeholder'=>'New Password'])!!}
 						{!!Form::password('new_password_confirmation',['class'=>'uk-input uk-margin-small','placeholder'=>'Confirm new password'])!!}
-						{!!Form::submit('Envoyer',['class'=>'uk-button uk-button-default'])!!}
+						{!!Form::submit('Envoyer',['class'=>'uk-button uk-button-primary uk-border-rounded uk-box-shadow-small'])!!}
 						{!!Form::close()!!}
 					</div>
 				</div>
+			</div>
 			</div>
 		</div>
 

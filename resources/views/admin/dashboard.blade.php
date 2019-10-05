@@ -7,7 +7,7 @@ Dashboard
 	<div class="uk-h3">Dashboard </div>
 	<div class="uk-grid-small uk-child-width-1-4@m" uk-grid>
 		<div>
-				<div class="uk-card uk-card-primary uk-border-rounded">
+				<div class="uk-card uk-card-default uk-card-primary uk-border-rounded">
 			    <div class="uk-card-header">
 			        <h4 class="uk-card-title uk-text-center">COMMANDES <span uk-icon="icon:grid;"></span></h4>
 			    </div>
@@ -19,7 +19,7 @@ Dashboard
 
 		<div>
 
-				<div class="uk-card uk-card-primary uk-border-rounded">
+				<div class="uk-card uk-card-default uk-card-primary uk-border-rounded">
 				    <div class="uk-card-header">
 				        <h3 class="uk-card-title uk-text-center">CASH (GNF) <span uk-icon="icon:credit-card;"></span></h3>
 				    </div>
@@ -32,7 +32,7 @@ Dashboard
 
 		<div>
 
-				<div class="uk-card uk-card-primary uk-border-rounded">
+				<div class="uk-card uk-card-default uk-card-primary uk-border-rounded">
 				    <div class="uk-card-header">
 				        <h3 class="uk-card-title uk-text-center">SHOP <span uk-icon="icon:location;ratio:"></span></h3>
 				    </div>
@@ -44,7 +44,7 @@ Dashboard
 		</div>
 		<div>
 
-				<div class="uk-card uk-card-primary uk-border-rounded">
+				<div class="uk-card uk-card-default uk-card-primary uk-border-rounded">
 				    <div class="uk-card-header">
 				        <h3 class="uk-card-title uk-text-center">ITEMS <span uk-icon="icon:list;ratio:"></span></h3>
 				    </div>

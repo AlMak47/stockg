@@ -150,13 +150,15 @@ class AdminController extends Controller
         $all = $this->getDetailsCommand($items);
         $totalCom=number_format($this->totalCashCommand($code));
         $interet = number_format($this->getInteret(false,null,$code));
+        $date = $this->dateOfDay();
         // dd($details);
         return view('admin.details-command')->withDetails($all)
                                             ->withCode($code)
                                             ->withStatus($details->status)
                                             ->withTotal($totalCom)
                                             ->withInteret($interet)
-                                            ->withBoutique($details->boutique);
+                                            ->withBoutique($details->boutique)
+                                            ->withDate($date);
     }
 
     // filtrer par date

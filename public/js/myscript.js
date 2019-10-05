@@ -58,9 +58,6 @@ $adminPage.createTableRow = function (sdata,champs=null,table,options,dashOption
 						list[i].addClass('uk-animation-toggle');
 						for(var j=0;j<champs.length;j++) {
 							td[j] =$("<td></td>");
-							td[j].addClass('uk-animation-shake');
-							// td[j].text(sdata[i].libelle);
-							// list[i].append(td[j]);
 						}
 						td[0].text(sdata[i].libelle);
 						td[1].text(sdata[i].quantite);
@@ -234,7 +231,6 @@ $adminPage.createTableData = function (sdata,champs=null,table) {
 					for(var i=0;i<sdata.length;i++) {
 						var td=[]
 						list[i]=$("<tr></tr>");
-						list[i].addClass('uk-animation-shake');
 						for(var j=0;j<champs.length;j++) {
 							td[j] =$("<td></td>");
 						}

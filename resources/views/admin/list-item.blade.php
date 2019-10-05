@@ -5,18 +5,14 @@ List Item
 @section('admin_contents')
 
 <div class="uk-container">
-	<h3 class="uk-h1"><span uk-icon="icon:thumbnails;ratio:2"></span> List Items <span class="uk-h4 uk-align-right"><span uk-icon="icon:calendar"></span> {{$date}}</span></h3>
-	<ul class="uk-breadcrumb">
-	    <li><a href=""><span uk-icon="icon:home"></span></a></li>
-	    <li><span>List Items</span></li>
-	</ul>
+	<h3 class="uk-h3">List Items</h3>
 		<hr class="uk-divider-small">
 		<div class="uk-child-width-1-2@m" uk-grid>
 			<div>
-				<h1 class="uk-h5"><span uk-icon="icon:location;ratio:0.7"></span> Filter by Boutique</h1>
+				<h1 class="uk-h5"><span uk-icon="icon:location;ratio:0.7"></span> Filter by Shop</h1>
 				{!!Form::open(['id'=>'filterForm'])!!}
 				{!!Form::close()!!}
-				<select name="boutique" class="uk-select" id="filter-by-boutique">
+				<select name="boutique" class="uk-select uk-border-rounded" id="filter-by-boutique">
 					<option value="all">All</option>
 					@foreach($boutiques as $values)
 					<option value="{{$values->localisation}}">{{$values->localisation}}</option>
@@ -26,18 +22,18 @@ List Item
 			</div>
 			<div>
 				<h1 class="uk-h5"><span uk-icon="icon:search;ratio:0.7"></span> Search</h1>
-				{!!Form::search('search','',['class'=>'uk-input','placeholder'=>'Search','id'=>'search'])!!}
+				{!!Form::search('search','',['class'=>'uk-input uk-border-rounded','placeholder'=>'Search','id'=>'search'])!!}
 			</div>
 	</div>
 		<!-- <div class="loader" uk-spinner></div> -->
-		<table class="uk-table uk-table-justify uk-table-divider" >
+		<table class="uk-table uk-table-justify uk-table-striped" >
 	    <thead>
 	        <tr>
-	            <th>Libelle</th>
+	            <th>Item</th>
 	            <th>Quantite</th>
 	            <th>PU (GNF)</th>
 	            <th>PA (GNF)</th>
-	            <th>Photo</th>
+	            <th>Image</th>
 	            <th colspan="2">-</th>
 	        </tr>
 	    </thead>
@@ -62,11 +58,12 @@ List Item
 			$.ajax({
 				url :$(this).attr('action'),
 				type : $(this).attr('method'),
-					dataType : 'json',
+				dataType : 'json',
 				data :$(this).serialize(),
-				error:function () {console.log('error');},
+				error:function (data) {
+					alert(data.responseJSON.message)
+				},
 				success:function (sdata) {
-					// console.log(sdata);
 					loading.remove();
 					$adminPage.createTableRow(sdata,['libelle','quantite','prix_achat','prix_unitaire','photo','edit','details'],$("#list-item"));
 					$adminPage.showImage();

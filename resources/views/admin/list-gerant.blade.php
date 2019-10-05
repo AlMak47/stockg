@@ -5,11 +5,7 @@ Shop List
 @section('admin_contents')
 
 <div class="uk-container">
-	<h3 class="uk-h1"><span uk-icon="icon:users;ratio:2"></span> List Users </h3>
-	<ul class="uk-breadcrumb">
-	    <li><a href=""><span uk-icon="icon:home"></span></a></li>
-	    <li><span>List users</span></li>
-	</ul>
+	<h3 class="uk-h3"> List Users </h3>
 		<hr class="uk-divider-small">
 		@if(session()->has('msg'))
 		<div class="uk-alert uk-alert-success">
@@ -18,7 +14,7 @@ Shop List
 			</p>
 		</div>
 		@endif
-		<table class="uk-table uk-table-justify uk-table-divider">
+		<table class="uk-table uk-table-justify uk-table-striped">
 	    <thead>
 	        <tr>
 	            <th>Username</th>
@@ -42,9 +38,9 @@ Shop List
 	    		<td>{{$values->statut}}</td>
 	    		<td>{{$values->phone}}</td>
 					@if($values->state == 'unblocked')
-	    		<td><a class="bloque-user uk-button-danger" href="#block-user" id="{{$values->username}}" uk-toggle="target: #my-id"><span uk-icon="icon:lock"></span> bloquer</a></td>
+	    		<td><a class="bloque-user uk-button-danger uk-border-rounded uk-box-shadow-small" href="#block-user" id="{{$values->username}}" uk-toggle="target: #my-id"><span uk-icon="icon:lock"></span> bloquer</a></td>
 					@else
-	    		<td><a class="bloque-user uk-alert-success" href="#unblock-user" id="{{$values->username}}" uk-toggle="target: #my-id"><span uk-icon="icon:unlock"></span> debloquer</a></td>
+	    		<td><a class="bloque-user uk-alert-success uk-border-rounded uk-box-shadow-small" href="#unblock-user" id="{{$values->username}}" uk-toggle="target: #my-id"><span uk-icon="icon:unlock"></span> debloquer</a></td>
 					@endif
 	    		<td><a href=""></a></td>
 	    	</tr>
@@ -58,8 +54,8 @@ Shop List
 				{!!Form::open(['url'=>'#','id'=>'block-user-form'])!!}
 				<input type="hidden" name="username" value="" id="user-id">
 				<input type="hidden" name="tag" value="" id="action-tag">
-				{!!Form::password('admin_password_confirm',['class'=>'uk-input uk-margin-small','id'=>'admin_password_confirm'])!!}
-        <button class="uk-button uk-button-primary" type="submit">Confirmer</button>
+				{!!Form::password('admin_password_confirm',['class'=>'uk-input uk-margin-small uk-border-rounded','id'=>'admin_password_confirm'])!!}
+        <button class="uk-button uk-button-primary uk-border-rounded uk-box-shadow-small" type="submit">Confirmer</button>
 				{!!Form::close()!!}
 
     </div>
