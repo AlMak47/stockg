@@ -1,5 +1,7 @@
 @extends('layouts.app_admin')
-
+@section('title')
+Add Item
+@endsection
 @section('admin_contents')
 <div class="uk-container">
 	<h3 class="uk-h1">Add to Stock <span class="uk-h4 uk-align-right"><span uk-icon="icon:calendar"></span> {{$date}}</span></h3>
@@ -45,14 +47,14 @@
 		<div>{!!Form::file('image',['class'=>'uk-margin-small'])!!}</div>
 		{!!Form::submit('Envoyer',['class'=>'uk-button uk-button-default'])!!}
 		{!!Form::close()!!}
-		
+
 </div>
 
 @endsection
 @section('admin_script')
 <script type="text/javascript">
 	$(function() {
-		// traitement de l'ajout du produit 
+		// traitement de l'ajout du produit
 		$("#item-name").on('keyup',function () {
 
 			// console.log($(this).val());

@@ -1,5 +1,7 @@
 @extends('layouts.app_admin')
-
+@section('title')
+List Item
+@endsection
 @section('admin_contents')
 
 <div class="uk-container">
@@ -20,7 +22,7 @@
 					<option value="{{$values->localisation}}">{{$values->localisation}}</option>
 					@endforeach
 				</select>
-				
+
 			</div>
 			<div>
 				<h1 class="uk-h5"><span uk-icon="icon:search;ratio:0.7"></span> Search</h1>
@@ -47,11 +49,11 @@
 @section('script')
 <script type="text/javascript">
 		 // qt;
-		 
-		 
+
+
 	$(function () {
 		var loading = $("<div></div>");loading.attr('uk-spinner','');
-		
+
 		 // liste=null;
 		$("#filterForm").on('submit',function(e) {
 			$("#list-item > tbody").html('');
@@ -65,8 +67,8 @@
 				error:function () {console.log('error');},
 				success:function (sdata) {
 					// console.log(sdata);
-					loading.remove();	
-					$adminPage.createTableRow(sdata,['libelle','quantite','prix_achat','prix_unitaire','photo','edit','details'],$("#list-item"));	
+					loading.remove();
+					$adminPage.createTableRow(sdata,['libelle','quantite','prix_achat','prix_unitaire','photo','edit','details'],$("#list-item"));
 					$adminPage.showImage();
 				}
 			});
@@ -91,15 +93,15 @@
 				// ===
 			} else {
 				$("#filterForm").submit();
-				
+
 			}
 		});
 		// recherche rapide
 		$("#search").on('keyup',function() {
 			$adminPage.findItem("{{csrf_token()}}","{{url()->current()}}/search-item",'',$(this).val());
 		});
-	
-		
+
+
 	});
 </script>
 @endsection

@@ -23,7 +23,7 @@ class GerantController extends Controller
 
     public function __construct() {
         // $this->CommandInSession();
-        // $date 
+        // $date
     }
 
     public function dashboard() {
@@ -41,7 +41,7 @@ class GerantController extends Controller
         $this->CommandInSession();
     	return view('gerant.add-commande')->withBoutique($this->getLocalisation()->localisation);
     }
-    
+
     public function getListItem() {
         // $this->CommandInSession();
         $item = $this->getItemByLocalisation($this->getLocalisation()->localisation,false);
@@ -68,27 +68,27 @@ class GerantController extends Controller
             $command->save();
             $msg ="Commande creée , Veuillez ajouter les produits";
         }
-        
+
        return response()->json($msg);
     }
 
     public function addItemToCommand(Request $request) {
-        
+
         // AJOUTER DES PRODUITS A LA COMMANDE EN COURS
-        
+
         if(!session()->get('command_en_cours')) {
-            // AUCUN COMMANDE N'EXITES  
-            
+            // AUCUN COMMANDE N'EXITES
+
             return response()->json("Aucune commande n'est defini");
         }
 
         $temp = Sortis::select()->where('code_commande',session()->get('command_en_cours'))
                                 ->where('produit',$request->input('ref'))->first();
-        $msg = "";    
+        $msg = "";
         // recuperation du stock
         $boutique = $this->getLocalisation()->localisation;
         $stock = Stockage::select()->where('produit',$request->input('ref'))
-                                    ->where('boutiques',$boutique)->first();   
+                                    ->where('boutiques',$boutique)->first();
         // VERIFIER SI LA QUANTITE COMMANDE EST INFERIEUR A LA QUANTITE DISPONIBLE
         if(!$this->isValidQuantite($request->input('quantite'),$stock->quantite)) {
             // LA QUANTITE N'EST PAS VALIDE
@@ -113,7 +113,7 @@ class GerantController extends Controller
         $sortis->produit = $request->input('ref');
         $sortis->quantite_commande = $request->input('quantite');
         $qt_restant = $stock->quantite - $sortis->quantite_commande;
-        
+
         $sortis->save();
 
         $msg = "ajouter avec success";
@@ -136,7 +136,7 @@ class GerantController extends Controller
             // $panierContent = Command::select()->where('code',session()->get('command_en_cours'))->get();
             $panierContent = Sortis::select()->where('code_commande',session()->get('command_en_cours'))->get();
             $nb=$panierContent->count();
-        } 
+        }
         return response()->json(['nb'=>$nb,'command'=>$panierContent]);
     }
 
@@ -145,7 +145,7 @@ class GerantController extends Controller
         // recuperer les informations du panier
         if(!session()->exists('command_en_cours')) {
             return response()->json("indefinie");
-        } 
+        }
            $command = session()->get('command_en_cours');
 
         $all = [];
@@ -163,16 +163,16 @@ class GerantController extends Controller
                 'image'=>$tmp->image
             ];
             $cash+=$total;
-            } 
+            }
             return response()->json(['item_details'=>$all,'total_cash'=>number_format($cash)]);
-        
+
     }
 
     // Verifier si la command est session et la mettre si elle n'y est pas
     public function CommandInSession() {
         if(session()->get('command_en_cours')) {
             //ne rien faire
-        } 
+        }
         else {
             // on recupere la commande en attente puis on la place en session
             $boutique = $this->getLocalisation()->localisation;
@@ -205,7 +205,7 @@ class GerantController extends Controller
         $msg = "";
         if(!$request->input('action')){
             $msg = "Erreur";
-            
+
         }
         $commandEnCours = session()->get('command_en_cours');
         if($request->input('action') == "abort") {
@@ -219,7 +219,7 @@ class GerantController extends Controller
                 }
             // suppression de sorti
             Sortis::select()->where('code_commande',$commandEnCours)->delete();
-            } 
+            }
             // suppression de la commande
             Command::select()->where('code',$commandEnCours)->delete();
 
@@ -227,8 +227,8 @@ class GerantController extends Controller
         } else {
             // processus de confirmation de la commande
             // verifier si la commande est valides
-            if($this->isValidCommand($commandEnCours)) {    
-                // changement du status 
+            if($this->isValidCommand($commandEnCours)) {
+                // changement du status
                 Command::select()->where('code',$commandEnCours)->update(['status'=>'confirme']);
                 $msg = "Commande Confirmée";
             } else {
@@ -253,18 +253,25 @@ class GerantController extends Controller
     }
 
     // recuperation de la liste des commandes
-    public function getListCommand() {
+    public function getListCommand(Request $request) {
         $boutique=$this->getLocalisation()->localisation;
         $commandes = Command::select()->where('boutique',$boutique)->orderBy('created_at','desc')->get();
         // recuperation des produits de la command
         $all=$this->organizeCommand($commandes,false);
         return response()->json($all);
+        // return response()->json($request);
     }
-
+    // liste des commandes par date
+    public function getListCommandByDate(Request $request) {
+      $boutique = $this->getLocalisation()->localisation;
+      $command = Command::where('boutique',$boutique)->whereBetween('created_at',[$request->input('date_depart'),$request->input('date_fin')])->orderBy('created_at','desc')->get();
+      $all = $this->organizeCommand($command,false);
+      return response()->json($all);
+    }
     // nombre de commande du jour
     public function commandOfDay($boutique) {
         $date = $this->dateOfDay();
-        $nb = Command::select()->where('boutique',$boutique)->whereDate('created_at',Carbon::now()->toDateString())->get()->count();
+        $nb = Command::select()->where('boutique',$boutique)->where('status','confirme')->whereDate('created_at',Carbon::now()->toDateString())->get()->count();
         if($nb >= 0) {
             return $nb;
         }
@@ -302,7 +309,7 @@ class GerantController extends Controller
 
     public function detailsItem($id) {
         $item = Produits::select()->where('reference',$id)->first();
-        // recuperation de la quantite en stock 
+        // recuperation de la quantite en stock
         $quantite =0;
         $tmp = Stockage::select()->where('produit',$id)->where('boutiques',$this->getLocalisation()->localisation)->first();
         $quantite=$tmp->quantite;

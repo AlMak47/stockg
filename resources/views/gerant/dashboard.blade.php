@@ -1,5 +1,7 @@
 @extends('layouts.app_gerant')
-
+@section('title')
+Dashboard
+@endsection
 @section('gerant_contents')
 <div class="uk-container uk-margin-small">
 	<h3 class="uk-h1 uk-visible@m">Dashboard <span class="uk-align-right uk-h4"><span uk-icon="icon:location;ratio:0.8"></span> {{$boutique}} </span>
@@ -77,7 +79,7 @@
 		// RECUPERATION DE LA LISTE DES PRODUITS
 		$adminPage.getDataFormAjax('all',"{{csrf_token()}}","{{url()->current()}}/"+"list-item",['libelle','quantite','prix_achat','prix_unitaire','photo','','details'],$("#list-item"),2,true);
 		$("#command-en-cours").on('click',function() {
-			$adminPage.detailsPanierOnGerant("{{csrf_token()}}","{{url()->current()}}");			
+			$adminPage.detailsPanierOnGerant("{{csrf_token()}}","{{url()->current()}}");
 		});
 		// setTimeout($adminPage.getPanier("{{csrf_token()}}","{{url()->current()}}/"+"get-panier"), 1000);
 	})

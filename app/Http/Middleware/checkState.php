@@ -4,7 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 
-class Da
+class checkState
 {
     /**
      * Handle an incoming request.
@@ -15,6 +15,10 @@ class Da
      */
     public function handle($request, Closure $next)
     {
+      $user = $request->user();
+      if($user && $user->state == "blocked") {
+        return redirect('/no-permission');
+      }
         return $next($request);
     }
 }

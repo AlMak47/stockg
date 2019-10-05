@@ -1,6 +1,6 @@
-// 
+//
 
-// 
+//
 
 
 var $adminPage = {
@@ -18,7 +18,7 @@ var $adminPage = {
 			form.append(ref);
 			return form;
 	},
-	
+
 	getDataFormAjax : function (reference,formToken,url,tab,table,options,dashOption=false) {
 		var quantite = null;
 		if(reference) {
@@ -44,12 +44,12 @@ var $adminPage = {
 		}
 			form.submit();
 	}
-		
+
 };
 
 $adminPage.createTableRow = function (sdata,champs=null,table,options,dashOption) {
 		 	table.html('');
-		 	// 
+		 	//
 		 	var list=[];
 		 	// var champs = ['libelle','quantite','prix_achat','prix_unitaire','photo','edit','details'];
 					for(var i=0;i<sdata.length;i++) {
@@ -59,21 +59,21 @@ $adminPage.createTableRow = function (sdata,champs=null,table,options,dashOption
 						for(var j=0;j<champs.length;j++) {
 							td[j] =$("<td></td>");
 							td[j].addClass('uk-animation-shake');
-							// td[j].text(sdata[i].libelle); 
+							// td[j].text(sdata[i].libelle);
 							// list[i].append(td[j]);
 						}
 						td[0].text(sdata[i].libelle);
 						td[1].text(sdata[i].quantite);
 						td[3].text(sdata[i].prix_achat);
 						td[2].text(sdata[i].prix_unitaire);
-						// 
-						
+						//
+
 
 						$adminPage.getAction(options,td,sdata[i].reference,dashOption);
 						// link.attr('href','')
-						
-						// 
-						// var img = $('<img/>'); 
+
+						//
+						// var img = $('<img/>');
 						// img.addClass('uk-preserve-width'); img.attr('src',"{{asset('uploads/')}}"+'/'+sdata[i].photo);
 						var img = $('<span><span/>');img.addClass('uk-icon uk-icon-image item-img');
 						img.attr('uk-icon-image','ratio:2');
@@ -97,7 +97,7 @@ $adminPage.createTableRow = function (sdata,champs=null,table,options,dashOption
 					$("td:empty").remove();
 
 
-		 	// 
+		 	//
 
 		 };
 
@@ -169,8 +169,8 @@ $adminPage.addItemToCommand  = function (item) {
 				});
 			}
 			// return 0;
-			// 
-			
+			//
+
 		});
 		// console.log(item);
 	});
@@ -211,8 +211,8 @@ $adminPage.detailsPanierOnGerant = function (token,url) {
 				UIkit.modal.alert('Aucune Commande en cours').then(function () {
 					$(location).attr('href','');
 				});
-			} 
-			else {	
+			}
+			else {
 				$("#load").fadeOut();
 				$adminPage.createTableData(data.item_details,['libelle','quantite','prix_unitaire','total'],$("#details-panier"));
 				$("#cash").html(data.total_cash);
@@ -226,11 +226,11 @@ $adminPage.detailsPanierOnGerant = function (token,url) {
 };
 
 $adminPage.createTableData = function (sdata,champs=null,table) {
-		 	
-		 	// 
+
+		 	//
 		 	table.html('');
 		 	var list=[];
-		 	
+
 					for(var i=0;i<sdata.length;i++) {
 						var td=[]
 						list[i]=$("<tr></tr>");
@@ -257,7 +257,7 @@ $adminPage.createTableData = function (sdata,champs=null,table) {
 					$("td:empty").remove();
 
 
-		 	// 
+		 	//
 
 		 };
 $adminPage.getListCommand = function (formToken,url,reference,opt=true) {
@@ -276,15 +276,16 @@ $adminPage.getListCommand = function (formToken,url,reference,opt=true) {
 			$adminPage.createTableDataCommand(data,['code','date','boutique','status','cash',''],$("#list-command"),opt);
 		})
 		.fail(function (data) {
-			console.log(data);
+			alert(data.responseJSON.message)
+			$(location).attr('href','')
 		});
 	});
 	form.submit();
 };
-// 
+//
 
 $adminPage.createTableDataCommand = function (sdata,champs=null,table,opt=true) {
-		 	// 
+		 	//
 		 	table.html('');
 		 	var list=[];
 					for(var i=0;i<sdata.length;i++) {
@@ -296,7 +297,7 @@ $adminPage.createTableDataCommand = function (sdata,champs=null,table,opt=true) 
 						td[0].text(sdata[i].code_command);
 						td[1].text(sdata[i].date);
 						td[2].text(sdata[i].boutique);
-						var badge = $("<span></span>"); 
+						var badge = $("<span></span>");
 						if(sdata[i].status =="attente") {
 							badge.addClass('uk-label uk-label-danger');
 						} else {
@@ -347,7 +348,7 @@ $adminPage.getListCommandFilter = function (formToken,url,reference) {
 $adminPage.finaliseCommand = function (formToken,url,reference) {
 	$(".btn-confirm").on('click',function() {
 		var form = $adminPage.makeForm(formToken,url,reference);
-		var input =$('<input/>'); 
+		var input =$('<input/>');
 		input.attr('type','hidden');
 		 input.val($(this).attr('id'));
 		input.attr('name','action');
@@ -395,8 +396,8 @@ $adminPage.findItem = function (formToken,url,reference,wordSearch) {
 		.done(function (data) {
 			if(data && data == "undefined") {
 				$("#list-item").html("<h1>Not found</h1>");
-			} else {	
-				$adminPage.createTableRow(data,['libelle','quantite','prix_achat','prix_unitaire','photo','edit','details'],$("#list-item"));	
+			} else {
+				$adminPage.createTableRow(data,['libelle','quantite','prix_achat','prix_unitaire','photo','edit','details'],$("#list-item"));
 				$adminPage.showImage();
 			}
 		})
@@ -408,9 +409,9 @@ $adminPage.findItem = function (formToken,url,reference,wordSearch) {
 };
 // ===
 
-// FILTRER LES COMMANDES PAR DATE 
+// FILTRER LES COMMANDES PAR DATE
 $adminPage.filterByDate = function ($ref) {
-	// FILTRAGE PAR DATE 
+	// FILTRAGE PAR DATE
 		var bout = $("<input/>");
 		 bout.attr('type','hidden');
 		 bout.attr('name','ref');
@@ -434,4 +435,3 @@ $adminPage.filterByDate = function ($ref) {
 			});
 		});
 };
-

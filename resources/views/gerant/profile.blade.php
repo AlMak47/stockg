@@ -1,5 +1,7 @@
 @extends('layouts.app_gerant')
-
+@section('title')
+Settings
+@endsection
 @section('gerant_contents')
 <div class="uk-container">
 	<h3 class="uk-h1">Profile <span class="uk-align-right uk-h4"><span uk-icon="icon:location;ratio:0.8"></span> {{$boutique}} </span>
@@ -29,7 +31,7 @@
 				</div>
 				<div class=" uk-card">
 					<h3 class="uk-card-header">Change password</h3>
-					
+
 					<div class="uk-card-body">
 						@if($errors->has('old_password') || $errors->has('new_password'))
 						<div class="uk-alert uk-alert-danger">
@@ -61,7 +63,7 @@
 				</div>
 			</div>
 		</div>
-		
+
 </div>
 <input type="hidden" id="token" value="{{csrf_token()}}">
 @endsection
@@ -75,7 +77,7 @@
 		// RECUPERATION DE LA LISTE DES PRODUITS
 		// $adminPage.getDataFormAjax('all',"{{csrf_token()}}",'',['libelle','quantite','prix_achat','prix_unitaire','photo','edit','details'],$("#list-item"),2);
 		//RECUPERATION DE LA LISTE DES COMMANDES
-		// $adminPage.getListCommand("{{csrf_token()}}","{{url()->current()}}",''); 
+		// $adminPage.getListCommand("{{csrf_token()}}","{{url()->current()}}",'');
 
 		// console.log($("td:empty"));
 		$("#new-command").on('submit',function(e) {
@@ -96,7 +98,7 @@
 		});
 
 		$("#command-en-cours").on('click',function() {
-			$adminPage.detailsPanierOnGerant("{{csrf_token()}}","{{url()->current()}}/"+"get-details");			
+			$adminPage.detailsPanierOnGerant("{{csrf_token()}}","{{url()->current()}}/"+"get-details");
 		});
 	});
 </script>

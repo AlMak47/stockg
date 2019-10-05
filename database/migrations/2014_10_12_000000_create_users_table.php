@@ -23,6 +23,10 @@ class CreateUsersTable extends Migration
             $table->rememberToken();
             $table->timestamps();
         });
+
+        Schema::table('users',function (Blueprint $table) {
+          $table->enum('state',['blocked','unblocked'])->default('unblocked');
+        });
     }
 
     /**

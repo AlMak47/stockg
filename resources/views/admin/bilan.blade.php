@@ -1,5 +1,9 @@
 @extends('layouts.app_admin')
 
+@section('title')
+Bilan
+@endsection
+
 @section('admin_contents')
 
 <div class="uk-container">

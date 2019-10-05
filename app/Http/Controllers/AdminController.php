@@ -208,7 +208,7 @@ class AdminController extends Controller
     // nombre de commande du jour
     public function commandOfDay() {
         $date = $this->dateOfDay();
-        $nb = Command::select()->whereDate('created_at',Carbon::now()->toDateString())->get()->count();
+        $nb = Command::select()->where('status','confirme')->whereDate('created_at',Carbon::now()->toDateString())->get()->count();
         if($nb >= 0) {
             return $nb;
         }
@@ -449,5 +449,63 @@ class AdminController extends Controller
             return response()->json('done');
         }
         return response()->json('fail');
+    }
+
+    // block , unblock user
+    public function actionStateUSer(Request $request) {
+      // validation ok
+      $userAdmin = Auth::user();
+      if(Hash::check($request->input('admin_password_confirm'),$userAdmin->password)) {
+        // sucess password admin
+        if($request->input('tag') == 'block') {
+          // block user
+          if(!$this->isUserBlocked($request->input('username'))) {
+            //
+            $this->blockUnblockUser('block',$request->input('username'));
+          } else {
+            return response()->json(['errors' =>  'Deja bloquer']);
+          }
+        } else {
+          // unblock user
+          if($this->isUserBlocked($request->input('username'))) {
+            //
+            $this->blockUnblockUser('unblock',$request->input('username'));
+          } else {
+            return response()->json(['errors' =>  'Deja debloquer']);
+          }
+        }
+      } else {
+        // wrong admin password
+        return response()->json(['errors' =>  'Wrong Password']);
+      }
+      return response()->json('success');
+    }
+
+    public function unblockUser(Request $request) {
+
+      return response()->json('success');
+    }
+
+    public function blockUnblockUser($tag="block",$username) {
+      if($tag == "block") {
+        // block user here
+        User::where('username',$username)->where('statut','gerant')->where('state','unblocked')->update([
+          'state' =>  'blocked'
+        ]);
+      } else {
+        // unblock user here
+        User::where('username',$username)->where('statut','gerant')->where('state','blocked')->update([
+          'state' =>  'unblocked'
+        ]);
+      }
+    }
+
+    // tester si le user est bloquer ou pas
+    public function isUserBlocked($username) {
+      $user = User::where('username',$username)->where('state','blocked')->first();
+      if($user) {
+        return $user;
+      }
+      return false;
     }
 }

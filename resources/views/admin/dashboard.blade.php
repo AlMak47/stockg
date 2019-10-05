@@ -1,5 +1,7 @@
 @extends('layouts.app_admin')
-
+@section('title')
+Dashboard
+@endsection
 @section('admin_contents')
 <div class="uk-container">
 	<h3 class="uk-h1">Dashboard <span class="uk-h4 uk-align-right"><span uk-icon="icon:calendar"></span> {{$date}}</span></h3>

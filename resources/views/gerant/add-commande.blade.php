@@ -1,5 +1,8 @@
 @extends('layouts.app_gerant')
 
+@section('title')
+New Command
+@endsection
 @section('gerant_contents')
 <div class="uk-container uk-visible@m">
 	<h3 class="uk-h1"><span uk-icon="icon:grid;ratio:2"></span> Add Command <span class="uk-align-right uk-h4"><span uk-icon="icon:location;ratio:0.8"></span> {{$boutique}} </span></h3>
@@ -23,7 +26,7 @@
 		{!!Form::submit('New command',['class'=>'uk-button uk-padding-remove'])!!}
 		{!!Form::close()!!}
 		@endif
-		
+
 		<table class="uk-table uk-table-justify uk-table-divider">
 	    <thead>
 	            <th>Libelle</th>
@@ -52,7 +55,7 @@
 			// $adminPage.getDataFormAjax('all',"{{csrf_token()}}",'',['libelle','quantite','prix_achat','prix_unitaire','photo','edit','details'],$("#list-item"),2);
 		},5000);
 		setInterval(function() {
-				
+
 			// $adminPage.getPanier("{{csrf_token()}}","{{url()->current()}}/"+"get-panier");
 			// RECUPERATION DE LA LISTE DES PRODUITS
 			$adminPage.getDataFormAjax('all',"{{csrf_token()}}",'',['libelle','quantite','prix_achat','prix_unitaire','photo','edit','details'],$("#list-item"),2);
@@ -80,7 +83,7 @@
 		// $adminPage.getPanier("{{csrf_token()}}");
 
 		$("#command-en-cours").on('click',function() {
-			$adminPage.detailsPanierOnGerant("{{csrf_token()}}","{{url()->current()}}/"+"get-details");			
+			$adminPage.detailsPanierOnGerant("{{csrf_token()}}","{{url()->current()}}/"+"get-details");
 		});
 	});
 </script>

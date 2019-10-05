@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>{{config('app.name')}}</title>
+	<title>@yield('title')</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="shortcut icon" href="{{asset('img/logo.png')}}" type="image/png" />
 		 <!-- UIkit CSS -->
@@ -103,7 +103,7 @@
     		<!-- USER ONLY -->
     		@if(Auth::user()->statut==="gerant")
     		<li>
-    			<a id="command-en-cours" href="#panier-content" uk-toggle> <span uk-icon="icon:cart"><span class="uk-visible@m">Command en cours</span></span> 
+    			<a id="command-en-cours" href="#panier-content" uk-toggle> <span uk-icon="icon:cart"><span class="uk-visible@m">Command en cours</span></span>
     				<span id="panier" class="uk-badge"></span>
     			</a>
     		</li>
@@ -180,16 +180,21 @@
 			                {!!Form::close()!!}
 			            </ul>
 			        </li>
-			        
+
 			    </ul>
 			</div>
 			<div class="uk-width-3-4@m uk-position-right">
 				<div class="uk-margin-xlarge-top uk-margin-medium-bottom" uk-scrollspy="cls:uk-animation-scale-up">@yield('content')</div>
 			</div>
 		</div>
-	</div>	
+	</div>
 </div>
-
+<!-- loading modal -->
+<div id="loading" uk-modal="esc-close:false ; bg-close : false;">
+	<div class="uk-modal-dialog uk-modal-body">
+		<div class="uk-align-center uk-text-center" uk-spinner> In progress ... </div>
+	</div>
+</div>
 <footer class="uk-background-primary uk-position-fixed uk-position-bottom">
 	<div class="uk-container uk-light">
 		<p class="uk-align-right uk-text-small">Copyright&copy;{{date('Y')}} | STOCKG  made by Smartech | v.1.0</p>

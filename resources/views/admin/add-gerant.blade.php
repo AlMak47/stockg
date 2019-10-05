@@ -1,5 +1,7 @@
 @extends('layouts.app_admin')
-
+@section('title')
+Add Shop
+@endsection
 @section('admin_contents')
 <div class="uk-container">
 	<h3 class="uk-h1">Add User <span class="uk-h4 uk-align-right"><span uk-icon="icon:calendar"></span> {{$date}}</span></h3>
@@ -14,7 +16,7 @@
 		<div>{{$errors->first('phone')}}</div>
 		</div>
 		@endif
-		
+
 	<!-- FORM ADD USER -->
 		<h4 class="uk-h3">User Infos</h4>
 		{!!Form::open(['url'=>'admin/add-gerant'])!!}

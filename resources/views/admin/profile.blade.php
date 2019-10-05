@@ -1,5 +1,9 @@
 @extends('layouts.app_admin')
 
+@section('title')
+Settings
+@endsection
+
 @section('admin_contents')
 
 <div class="uk-container">
@@ -30,7 +34,7 @@
 				</div>
 				<div class=" uk-card">
 					<h3 class="uk-card-header">Change password</h3>
-					
+
 					<div class="uk-card-body">
 						@if($errors->has('old_password') || $errors->has('new_password'))
 						<div class="uk-alert uk-alert-danger">
@@ -62,14 +66,14 @@
 				</div>
 			</div>
 		</div>
-		
+
 <!-- <input type="hidden" id="token" value="{{csrf_token()}}"> -->
 @endsection
 @section('script')
 <script type="text/javascript">
 
 	$(function() {
-		
+
 	});
 </script>
 @endsection

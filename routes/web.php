@@ -18,9 +18,11 @@ Route::get('/',function () {
 
 Route::post('/connexion','Auth\LoginController@connexion');
 
+// no permission route
+Route::get('/no-permission','HomeController@noPermission');
 // ROUTE D'ADMINISTRATION
 
-Route::middleware(['auth','admin'])->group(function () {
+Route::middleware(['auth','state','admin'])->group(function () {
 
     Route::get('admin/dashboard','AdminController@dashboard');
     Route::get('admin/add-gerant','AdminController@addGerant');
@@ -39,7 +41,7 @@ Route::middleware(['auth','admin'])->group(function () {
     Route::get('admin/profile','AdminController@profile');
     Route::post('admin/profile','AdminController@changePassword');
     Route::get('admin/command/{code}','AdminController@detailsCommand');
-    // recherche instantanee
+    // recherche inauthstantanee
     Route::post('admin/list-item/search-item','ProduitController@searchItem');
     // FILTRAGE PAR DATE
     Route::post('admin/list-command/filter-by-date','AdminController@filterByDate');
@@ -54,6 +56,9 @@ Route::middleware(['auth','admin'])->group(function () {
     Route::post('admin/edit-item/{id}','AdminController@makeEditItem');
     // simplify
     Route::post('admin/add-item/simplify','AdminController@simplify');
+    // blocked unblocked user
+    Route::post("admin/list-gerant/block-user",'AdminController@actionStateUser');
+    Route::post('/admin/list-gerant/unblock-user','AdminController@actionStateUser');
 
 });
 
@@ -66,7 +71,7 @@ Route::middleware(['auth','admin'])->group(function () {
 Auth::routes();
 // Route::get('/home', 'HomeController@index')->name('home');
 
-Route::middleware(['auth','gerant'])->group(function () {
+Route::middleware(['auth','state','gerant'])->group(function () {
 
 	Route::get('gerant/dashboard','GerantController@dashboard');
     Route::get('gerant/command/add','GerantController@addCommande');
@@ -97,6 +102,8 @@ Route::middleware(['auth','gerant'])->group(function () {
     Route::post('gerant/command/finalise','GerantController@confirmCommand');
     Route::post('gerant/item/finalise','GerantController@confirmCommand');
     Route::post('gerant/command/list','GerantController@getListCommand');
+    // command par date
+    Route::post('/gerant/command/list/by-date','GerantController@getListCommandByDate');
     //LE PROFIL
     Route::get('gerant/profile/','GerantController@getProfile');
     Route::post('gerant/profile','GerantController@changePassword');
