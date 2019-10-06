@@ -4,23 +4,15 @@ Details Item
 @endsection
 
 @section('gerant_contents')
-
-<div class="uk-container">
-	<h3 class="uk-h1">Details Item <span class="uk-align-right uk-h4"><span uk-icon="icon:location;ratio:0.8"></span> {{$boutique}} </span>
-		<!-- <span class="uk-h4 uk-align-right">{{$date}}</span></h3> -->
-</div>
 <!-- TOUS LES PRODUITS -->
 
 <div class="uk-container">
-	<ul class="uk-breadcrumb">
-	    <li><a href=""><span uk-icon="icon:home"></span></a></li>
-	    <li><span>Details Item</span></li>
-	</ul>
+	<h3 class="uk-h3">Details Item</h3>
 
 		<hr class="uk-divider-small">
 
 		<div class="uk-grid-match uk-child-width-1-2@m" uk-grid>
-			<div><img src="{{asset('uploads/'.$details[0]->image)}}" class="uk-width-small uk-animation-kenburns" uk-img></div>
+			<div><img src="{{asset('uploads/'.$details[0]->image)}}" class="uk-width-small uk-border-rounded uk-box-shadow-small" uk-img></div>
 			<div>
 				<ul class="uk-list uk-list-divider">
 					<li>Reference : {{$details[0]->reference}}</li>

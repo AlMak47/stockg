@@ -17,7 +17,7 @@
 		@endif
 	<!-- FORM ADD BOUTIQUE -->
 		<h4 class="uk-h3">Boutique Infos</h4>
-		{!!Form::open(['url'=>'admin/add-boutique'])!!}
+		{!!Form::open(['url'=>'admin/add-boutique','id'=>'form-add-shop'])!!}
 			{!!Form::hidden('username',$user->username)!!}
 			{!!Form::text('localisation','',['class'=>'uk-input uk-margin-small','placeholder'=>'Nom du magazin'])!!}
 			{!!Form::submit('Ajouter',['class'=>'uk-button uk-button-default'])!!}
@@ -25,4 +25,13 @@
 	<!--  -->
 </div>
 
+@endsection
+@section('script')
+<script type="text/javascript">
+	$(function () {
+		$("#form-add-shop").on('submit',function () {
+			UIkit.modal("#loading").show()
+		})
+	})
+</script>
 @endsection

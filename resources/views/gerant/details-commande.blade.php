@@ -1,24 +1,16 @@
 @extends('layouts.app_gerant')
-
+@section("title")
+Details Command
+@endsection
 @section('gerant_contents')
-<div class="uk-container">
-	<h3 class="uk-h1">List Command <span class="uk-align-right uk-h4"><span uk-icon="icon:location;ratio:0.8"></span> {{$boutique}} </span>
-		<span class="uk-h4 uk-align-right">{{$date}}</span></h3>
-</div>
-<!-- TOUS LES PRODUITS -->
 
 <div class="uk-container">
-	<ul class="uk-breadcrumb">
-	    <li><a href=""><span uk-icon="icon:home"></span></a></li>
-	    <li><a href="{{url('gerant/command/list')}}"><span uk-icon="icon:arrow-left;ratio:1"></span>List Command</a></li>
-	    <li><span>Details Command</span></li>
-	</ul>
-
+	<h3 class="uk-h3"><a href="{{url('gerant/command/list')}}" class="uk-button"> <span uk-tooltip="List Command" class="uk-button-primary uk-border-circle" uk-icon="arrow-left"></span> </a>Details Command</h3>
 		<hr class="uk-divider-small">
 
 		<div class="uk-h4"><span>Command : <span class="uk-label">{{$code}}</span> </span> | <span>Status : <span class="{{ $status =='confirme' ? 'uk-label uk-label-success' : 'uk-label uk-label-danger'}}"> {{$status}}</span></span> | <span>Montant Total (GNF) : <span class="uk-text-lead">{{$total}}</span></span></div>
-		
-		<table class="uk-table">
+
+		<table class="uk-table uk-table-striped">
 			<thead>
 				<tr>
 					<th>Reference</th>
@@ -55,7 +47,7 @@
 		// RECUPERATION DE LA LISTE DES PRODUITS
 		// $adminPage.getDataFormAjax('all',"{{csrf_token()}}",'',['libelle','quantite','prix_achat','prix_unitaire','photo','edit','details'],$("#list-item"),2);
 		//RECUPERATION DE LA LISTE DES COMMANDES
-		$adminPage.getListCommand("{{csrf_token()}}","{{url()->current()}}",''); 
+		$adminPage.getListCommand("{{csrf_token()}}","{{url()->current()}}",'');
 
 		// console.log($("td:empty"));
 		$("#new-command").on('submit',function(e) {
@@ -76,7 +68,7 @@
 		});
 
 		$("#command-en-cours").on('click',function() {
-			$adminPage.detailsPanierOnGerant("{{csrf_token()}}","{{url()->current()}}/"+"get-details");			
+			$adminPage.detailsPanierOnGerant("{{csrf_token()}}","{{url()->current()}}/"+"get-details");
 		});
 	});
 </script>

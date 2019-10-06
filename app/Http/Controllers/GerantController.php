@@ -29,13 +29,19 @@ class GerantController extends Controller
     public function dashboard() {
         $this->CommandInSession();
     	$tmp=$this->getLocalisation();
-        $this->cashOfDay($tmp->localisation);
+      $item = $this->ItemQuantity();
     	return view('gerant.dashboard')->withBoutique($tmp->localisation)
                         ->withDate($this->dateOfDay())
                         ->withCommand($this->commandOfDay($tmp->localisation))
-                        ->withCash($this->cashOfDay($tmp->localisation));
+                        ->withCash($this->cashOfDay($tmp->localisation))
+                        ->withItem($item);
     }
-
+    // nombre de produit en stock
+    public function ItemQuantity () {
+      $temp = Stockage::where('boutiques',$this->getLocalisation()->localisation)->get();
+      return $temp->count();
+    }
+    // ajouter une commande
     public function addCommande() {
         // session()->forget('command_en_cours');
         $this->CommandInSession();

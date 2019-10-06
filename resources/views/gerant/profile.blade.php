@@ -3,23 +3,14 @@
 Settings
 @endsection
 @section('gerant_contents')
-<div class="uk-container">
-	<h3 class="uk-h1">Profile <span class="uk-align-right uk-h4"><span uk-icon="icon:location;ratio:0.8"></span> {{$boutique}} </span>
-		<span class="uk-h4 uk-align-right">{{$date}}</span></h3>
-</div>
-<!-- TOUS LES PRODUITS -->
 
 <div class="uk-container">
-	<ul class="uk-breadcrumb">
-	    <li><a href=""><span uk-icon="icon:home"></span></a></li>
-	    <li><span>List Items</span></li>
-	</ul>
-
+	<h3 class="uk-h3">Profile</h3>
 		<hr class="uk-divider-small">
 
-		<div class="uk-section uk-section-default uk-margin-remove uk-padding-remove">
-			<div class="uk-grid-match uk-child-width-1-2@m" uk-grid>
-				<div class="uk-card">
+		<div class="">
+			<div class="uk-grid-small uk-child-width-1-1@m" uk-grid>
+				<div class="uk-card uk-card-default uk-border-rounded uk-box-shadow-small">
 					<h3 class="uk-card-header">Profile Infos</h3>
 					<div class="uk-card-body">
 						<ul class="uk-list uk-list-divider">
@@ -29,7 +20,7 @@ Settings
 						</ul>
 					</div>
 				</div>
-				<div class=" uk-card">
+				<div class=" uk-card uk-card-default uk-border-rounded uk-box-shadow-small">
 					<h3 class="uk-card-header">Change password</h3>
 
 					<div class="uk-card-body">
@@ -54,10 +45,10 @@ Settings
 						</div>
 						@endif
 						{!!Form::open()!!}
-						{!!Form::text('old_password','',['class'=>'uk-input uk-margin-small','placeholder'=>'Old Password'])!!}
-						{!!Form::password('new_password',['class'=>'uk-input uk-margin-small','placeholder'=>'New Password'])!!}
-						{!!Form::password('new_password_confirmation',['class'=>'uk-input uk-margin-small','placeholder'=>'Confirm new password'])!!}
-						{!!Form::submit('Envoyer',['class'=>'uk-button uk-button-default'])!!}
+						{!!Form::text('old_password','',['class'=>'uk-input uk-margin-small uk-border-rounded','placeholder'=>'Old Password'])!!}
+						{!!Form::password('new_password',['class'=>'uk-input uk-margin-small uk-border-rounded','placeholder'=>'New Password'])!!}
+						{!!Form::password('new_password_confirmation',['class'=>'uk-input uk-margin-small uk-border-rounded','placeholder'=>'Confirm new password'])!!}
+						{!!Form::submit('Envoyer',['class'=>'uk-button uk-button-primary uk-border-rounded uk-box-shadow-small'])!!}
 						{!!Form::close()!!}
 					</div>
 				</div>

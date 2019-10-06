@@ -3,10 +3,6 @@
 Command
 @endsection
 @section('gerant_contents')
-<div class="uk-container uk-visible@m">
-	<h3 class="uk-h1"><span uk-icon="icon:grid;ratio:2"></span> List Command <span class="uk-align-right uk-h4"><span uk-icon="icon:location;ratio:0.8"></span> {{$boutique}} </span>
-		<span class="uk-h4 uk-align-right">{{$date}}</span></h3>
-</div>
 <div class="uk-container uk-hidden@m" style="margin-top:100px !important;">
 	<h3 class="uk-h1"><span uk-icon="icon:grid;ratio:2"></span> List Command <span class="uk-align-right uk-h4"><span uk-icon="icon:location;ratio:0.8"></span> {{$boutique}} </span>
 		<span class="uk-h4 uk-align-right">{{$date}}</span></h3>
@@ -14,11 +10,7 @@ Command
 <!-- TOUS LES PRODUITS -->
 
 <div class="uk-container">
-	<ul class="uk-breadcrumb">
-	    <li><a href=""><span uk-icon="icon:home"></span></a></li>
-	    <li><span>List Items</span></li>
-	</ul>
-
+	<h3 class="uk-h3"> List Command</h3>
 		<hr class="uk-divider-small">
 		<div class="uk-child-width-1-2@m" uk-grid>
 
@@ -26,19 +18,19 @@ Command
 				<h1 class="uk-h5">Filter by date</h1>
 				{!!Form::open(['url'=>'gerant/command/list/by-date','class'=>'uk-grid-small','uk-grid','id'=>'by-date'])!!}
 				<div class="uk-width-2-5@s">
-					{!!Form::text('date_depart',null,['class'=>'uk-input select_date','placeholder'=>'Du'])!!}
+					{!!Form::text('date_depart',null,['class'=>'uk-input select_date uk-border-rounded','placeholder'=>'Du'])!!}
 				</div>
 				<div class="uk-width-2-5@s">
-					{!!Form::text('date_fin',null,['class'=>'uk-input select_date','placeholder'=>'Au'])!!}
+					{!!Form::text('date_fin',null,['class'=>'uk-input select_date uk-border-rounded','placeholder'=>'Au'])!!}
 				</div>
 				<div class="uk-width-1-5@s">
-				{!!Form::submit('Ok',['class'=>'uk-button uk-button-default','id'=>'btn-submit'])!!}
+				{!!Form::submit('Ok',['class'=>'uk-button uk-button-primary uk-border-rounded uk-box-shadow-small','id'=>'btn-submit'])!!}
 				</div>
 				{!!Form::close()!!}
 			</div>
 		</div>
 		<!-- <div class="uk-alert uk-alert-infos" id="zone-infos"></div> -->
-		<table class="uk-table">
+		<table class="uk-table uk-table-striped">
 			<thead>
 				<tr>
 					<th>Code</th>

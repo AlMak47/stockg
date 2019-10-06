@@ -7,7 +7,7 @@
 		 <!-- UIkit CSS -->
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.0-rc.26/css/uikit.min.css" />
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/themes/base/jquery-ui.css" />
-	
+
 </head>
 <body>
 <div class="uk-position-relative">
@@ -101,6 +101,9 @@
     </div>
     <div class="uk-navbar-right uk-dark">
     	<ul class="uk-navbar-nav">
+				@if(Auth::user()->statut == "gerant")
+    		<li class="uk-visible@l"><a> {{$boutique}} <span uk-icon="icon:location" class="uk-margin-small-left uk-button-primary uk-box-shadow-small uk-border-circle uk-padding-small"></span></a></li>
+				@endif
     		<li class="uk-visible@l"><a> {{$date}} <span uk-icon="icon:calendar" class="uk-margin-small-left uk-button-primary uk-box-shadow-small uk-border-circle uk-padding-small"></span></a></li>
     		<li>
 					<a> {{Auth::user()->username}} <span class="uk-button-primary uk-border-circle uk-padding-small uk-box-shadow-small uk-margin-small-left" uk-icon="icon:user"></span> </a>
@@ -179,7 +182,7 @@
 </div>
 <!-- loading modal -->
 <div id="loading" uk-modal="esc-close:false ; bg-close : false;">
-	<div class="uk-modal-dialog uk-modal-body">
+	<div class="uk-modal-dialog uk-modal-body uk-border-rounded">
 		<div class="uk-align-center uk-text-center" uk-spinner> In progress ... </div>
 	</div>
 </div>

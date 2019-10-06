@@ -8,6 +8,7 @@ use App\Http\Requests\BoutiqueRequest;
 use App\Http\Requests\ProduitRequest;
 use App\Http\Requests\PasswordChangeRequest;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\File;
 use App\Traits\Similarity;
 use App\Boutique;
 use App\User;
@@ -427,23 +428,50 @@ class AdminController extends Controller
     }
 
     public function makeEditItem($id,Request $request) {
+      $validation = $request->validate([
+        'reference' =>  'required|exists:produits,reference',
+        'libelle' =>  'required|string',
+        'prix_achat'  =>  'required|numeric|min:0',
+        'prix_unitaire' =>  'required|numeric|min:0'
+      ]);
 
-        if($request->file('image')) {
+      $edit = Produits::find($request->input('reference'));
+        if($request->hasFile('image')) {
             // l'image existe
+
+          if(File::exists(config('image.path').'/'.$edit->image)) {
+            if(File::delete(config('image.path').'/'.$edit->image)) {
+              if($request->file('image')->move(config('image.path'),$edit->image)) {
+                $edit->libelle = $request->input('libelle');
+                $edit->prix_achat = $request->input('prix_achat');
+                $edit->prix_unitaire = $request->input('prix_unitaire');
+                $edit->save();
+              } else {
+                return redirect('admin/edit-item')->with('_errors',"Error ! Try again");
+              }
+            } else {
+              return redirect('admin/edit-item')->with("_errors","Error ! Try again");
+            }
+          } else {
+            // le fichier image n'existe pas
+            if($request->file('image')->move(config('image.path'),$edit->image)) {
+              $edit->libelle = $request->input('libelle');
+              $edit->prix_achat = $request->input('prix_achat');
+              $edit->prix_unitaire = $request->input('prix_unitaire');
+              $edit->save();
+            }
+          }
         }
         else {
             // l'image n'existe pas
             // verifier si le nom existe deja
-            if($this->isExistItem($request->input('libelle'))) {
-                return redirect("admin/edit-item/".$id)->with('_errors','`'.$request->input('libelle').'` existe deja');
-            }
             Produits::select()->where('reference',$id)->update([
                 'libelle'=>$request->input('libelle'),
                 'prix_achat' => $request->input('prix_achat'),
                 'prix_unitaire' => $request->input('prix_unitaire')
             ]);
-            return redirect("admin/edit-item/".$id)->with('success',"Update Complete");
         }
+        return redirect("admin/edit-item/".$id)->with('success',"Update Complete");
     }
 
     public function simplify(Request $request) {

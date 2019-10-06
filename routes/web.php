@@ -112,4 +112,6 @@ Route::middleware(['auth','state','gerant'])->group(function () {
     Route::get('gerant/item/{id}','GerantController@detailsItem');
     // DETAILS COMMANDE
     Route::get('gerant/command/{code}','GerantController@detailsCommande');
+
+    Route::post('gerant/dashboard/search-item','ProduitController@searchItem');
 });

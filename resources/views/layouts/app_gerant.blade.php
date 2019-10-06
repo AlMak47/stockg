@@ -27,16 +27,16 @@
         </div>
         <div class="uk-modal-footer">
         	<!-- ENVOI DE LA CONFIRMATION DE LA COMMANDE EN ATTENTE -->
-            <a class="uk-button uk-button-default btn-confirm" id="abort"><span uk-icon="icon:close"></span> Annuler</a>
-        	<a class="uk-button uk-button-default btn-confirm" id="confirm"><span uk-icon="icon:check"></span> Confirmer</a>
+            <a class="uk-button uk-button-danger uk-border-rounded uk-box-shadow-small btn-confirm" id="abort"><span uk-icon="icon:close"></span> Annuler</a>
+        	<a class="uk-button uk-button-primary uk-border-rounded uk-box-shadow-small btn-confirm" id="confirm"><span uk-icon="icon:check"></span> Confirmer</a>
         </div>
     </div>
 </div>
 @endsection
 
-@section('script') 
+@section('script')
 <script type="text/javascript">
-	
+
 	$(function () {
 		// $adminPage.getPanier("{{csrf_token()}}","{{url()->current()}}/"+"get-panier");
         // $adminPage.finaliseCommand("{{csrf_token()}}","command/finalise","");

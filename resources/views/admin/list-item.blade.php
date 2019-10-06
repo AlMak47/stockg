@@ -76,7 +76,7 @@ List Item
 		// FILTER BY BOUTIQUE
 		$("#filter-by-boutique").on('change',function () {
 			// console.log($("#list-item"));
-			console.log($("#filter-by-boutique").val());
+			// console.log($("#filter-by-boutique").val());
 			if($(this).val() !== "all") {
 				loading.insertBefore($('#list-item'));
 				$("#list-item > tbody").html('');

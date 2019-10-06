@@ -1,46 +1,61 @@
 @extends('layouts.app_admin')
-
+@section('title')
+Edit Item
+@endsection
 @section('admin_contents')
 <div class="uk-container">
-	<h3 class="uk-h1">Edit Item <span class="uk-h4 uk-align-right"><span uk-icon="icon:calendar"></span> {{$date}}</span></h3>
-	<ul class="uk-breadcrumb">
-	    <li><a href="{{url('/admin/list-item/')}}"><span uk-icon="icon:home"></span></a></li>
-	    <li><span>Edit Item</span></li>
-	</ul>
+	<h3 class="uk-h3">Edit Item</h3>
 		<hr class="uk-divider-small">
 		@if(session('success'))
-		<div class="uk-alert uk-alert-success">
-			{{session('success')}}
+		<div class="uk-alert-success uk-border-rounded uk-box-shadow-small" uk-alert>
+			<a href="#" class="uk-alert-close" uk-close></a>
+			<p>{{session('success')}}</p>
 		</div>
 		@endif
-		<!-- errors messages -->
-		@if($errors->has('boutiques') || $errors->has('libelle') || $errors->has('prix_achat') || $errors->has('prix_unitaire') || $errors->has('quantite') || $errors->has('image'))
-		<div class="uk-alert uk-alert-danger">
-			<div>{{$errors->first('libelle')}}</div>
-			<div>{{$errors->first('prix_achat')}}</div>
-			<div>{{$errors->first('prix_unitaire')}}</div>
-			<div>{{$errors->first('quantite')}}</div>
-			<div>{{$errors->first('image')}}</div>
-			<div>{{$errors->first('boutiques')}}</div>
+		@if($errors->any())
+		@foreach($errors->all() as $error)
+		<div class="uk-alert-danger uk-border-rounded uk-box-shadow-small" uk-alert>
+			<a href="#" class="uk-alert-close" uk-close></a>
+			<p>{{$error}}</p>
 		</div>
+		@endforeach
 		@endif
 		<!-- erreur de traitement -->
-		@if(session('_errors')) 
-		<div class="uk-alert uk-alert-danger">
+		@if(session('_errors'))
+		<div class="uk-alert-danger uk-border-rounded uk-box-shadow-small" uk-alert>
+			<a href="#" class="uk-alert-close" uk-close></a>
 			<div>{{session('_errors')}}</div>
 		</div>
 		@endif
 
-		{!!Form::open(['url'=>"admin/edit-item/$itemedit->reference",'enctype'=>'multipart/form-data'])!!}
+		{!!Form::open(['url'=>"admin/edit-item/$itemedit->reference",'enctype'=>'multipart/form-data','id'=>'form-edit-item'])!!}
 		{!!Form::hidden('reference',$itemedit->reference)!!}
-		{!!Form::text('libelle',$itemedit->libelle,['class'=>'uk-input uk-margin-small','placeholder'=>'Item Name'])!!}
-		{!!Form::text('prix_achat',$itemedit->prix_achat,['class'=>'uk-input uk-margin-small','placeholder'=>'Prix achat'])!!}
-		{!!Form::text('prix_unitaire',$itemedit->prix_unitaire,['class'=>'uk-input uk-margin-small','placeholder'=>'Unit Price'])!!}
+		{!!Form::label("Item *")!!}
+		{!!Form::text('libelle',$itemedit->libelle,['class'=>'uk-input uk-margin-small uk-border-rounded','placeholder'=>'Item Name'])!!}
+		{!!Form::label("Buying Price *")!!}
+		{!!Form::text('prix_achat',$itemedit->prix_achat,['class'=>'uk-input uk-margin-small uk-border-rounded','placeholder'=>'Prix achat'])!!}
+		{!!Form::label("Selling Price *")!!}
+		{!!Form::text('prix_unitaire',$itemedit->prix_unitaire,['class'=>'uk-input uk-margin-small uk-border-rounded','placeholder'=>'Unit Price'])!!}
 		<img src="{{asset('uploads/'.$itemedit->image)}}" class="uk-width-small" uk-img>
-		<div>{!!Form::file('image',['class'=>'uk-margin-small'])!!}</div>
-		{!!Form::submit('Envoyer',['class'=>'uk-button uk-button-default'])!!}
+		<div class="uk-margin-small">
+			{!!Form::label("Remplace Image *")!!}
+      <div uk-form-custom>
+				{!!Form::file('image')!!}
+          <button class="uk-button-primary uk-padding-small uk-border-circle uk-icon-link" uk-icon="icon:image" type="button" tabindex="-1"></button>
+      </div>
+		</div>
+		{!!Form::submit('Envoyer',['class'=>'uk-button uk-button-primary uk-border-rounded uk-box-shadow-small'])!!}
 		{!!Form::close()!!}
-		
+
 </div>
 
+@endsection
+@section('script')
+<script type="text/javascript">
+	$(function () {
+		$("#form-edit-item").on('submit',function () {
+			UIkit.modal("#loading").show()
+		})
+	})
+</script>
 @endsection

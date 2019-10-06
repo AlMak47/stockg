@@ -4,30 +4,24 @@
 New Command
 @endsection
 @section('gerant_contents')
-<div class="uk-container uk-visible@m">
-	<h3 class="uk-h1"><span uk-icon="icon:grid;ratio:2"></span> Add Command <span class="uk-align-right uk-h4"><span uk-icon="icon:location;ratio:0.8"></span> {{$boutique}} </span></h3>
-</div>
+
 <div class="uk-container uk-hidden@m" style="margin-top:100px !important;">
 	<h3 class="uk-h1"><span uk-icon="icon:grid;ratio:2"></span> Add Command <span class="uk-align-right uk-h4"><span uk-icon="icon:location;ratio:0.8"></span> {{$boutique}} </span></h3>
 </div>
 <!-- TOUS LES PRODUITS -->
 
 <div class="uk-container">
-	<ul class="uk-breadcrumb">
-	    <li><a href=""><span uk-icon="icon:home"></span></a></li>
-	    <li><span>List Items</span></li>
-	</ul>
-
+	<h3 class="uk-h3">Add Command </h3>
 		<hr class="uk-divider-small">
 		<!-- <div class="uk-alert uk-alert-infos" id="zone-infos"></div> -->
 
 		@if(!session()->exists('command_en_cours'))
 		{!!Form::open(['url'=>'gerant/command/new-command','id'=>'new-command'])!!}
-		{!!Form::submit('New command',['class'=>'uk-button uk-padding-remove'])!!}
+		{!!Form::submit('New command',['class'=>'uk-button uk-button-primary uk-border-rounded uk-box-shadow-small'])!!}
 		{!!Form::close()!!}
 		@endif
 
-		<table class="uk-table uk-table-justify uk-table-divider">
+		<table class="uk-table uk-table-justify uk-table-striped">
 	    <thead>
 	            <th>Libelle</th>
 	            <th>Quantite</th>
