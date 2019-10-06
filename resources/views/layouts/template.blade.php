@@ -101,11 +101,21 @@
     </div>
     <div class="uk-navbar-right uk-dark">
     	<ul class="uk-navbar-nav">
+				<li class="uk-visible@l"><a> {{$date}} <span uk-icon="icon:calendar" class="uk-margin-small-left uk-button-primary uk-box-shadow-small uk-border-circle uk-padding-small"></span></a></li>
 				@if(Auth::user()->statut == "gerant")
-    		<li class="uk-visible@l"><a> {{$boutique}} <span uk-icon="icon:location" class="uk-margin-small-left uk-button-primary uk-box-shadow-small uk-border-circle uk-padding-small"></span></a></li>
-				@endif
-    		<li class="uk-visible@l"><a> {{$date}} <span uk-icon="icon:calendar" class="uk-margin-small-left uk-button-primary uk-box-shadow-small uk-border-circle uk-padding-small"></span></a></li>
-    		<li>
+    		<!-- <li class="uk-visible@l"><a> {{$boutique}} <span uk-icon="icon:location" class="uk-margin-small-left uk-button-primary uk-box-shadow-small uk-border-circle uk-padding-small"></span></a></li> -->
+				<li>
+					<a> {{$boutique}} <span class="uk-button-primary uk-border-circle uk-padding-small uk-box-shadow-small uk-margin-small-left" uk-icon="icon:user"></span> </a>
+					<div class="uk-navbar-dropdown">
+						<ul class="uk-nav uk-navbar-nav">
+							{!!Form::open(['url'=>'/logout'])!!}
+							<li><button type="submit" class="uk-button" href="{{url('logout')}}"><span uk-icon="icon:sign-out"></span> Logout</button></li>
+							{!!Form::close()!!}
+						</ul>
+					</div>
+				</li>
+				@else
+				<li>
 					<a> {{Auth::user()->username}} <span class="uk-button-primary uk-border-circle uk-padding-small uk-box-shadow-small uk-margin-small-left" uk-icon="icon:user"></span> </a>
 					<div class="uk-navbar-dropdown">
 						<ul class="uk-nav uk-navbar-nav">
@@ -115,14 +125,16 @@
 						</ul>
 					</div>
 				</li>
+				@endif
     	</ul>
     </div>
-		<div class="uk-navbar-center uk-dark uk-visible@l">
+		<div class="uk-navbar-center uk-dark">
+
 			<ul class="uk-navbar-nav">
 				<!-- USER ONLY -->
 				@if(Auth::user()->statut==="gerant")
-				<li><a href="{{url('/gerant/dashboard')}}" uk-tooltip = "Dashboard"> <span uk-icon="icon:home" class="uk-margin-small-left uk-button-primary uk-box-shadow-small uk-border-circle uk-padding-small"></span></a></li>
-				<li>
+				<li class="uk-visible@l"><a href="{{url('/gerant/dashboard')}}" uk-tooltip = "Dashboard"> <span uk-icon="icon:home" class="uk-margin-small-left uk-button-primary uk-box-shadow-small uk-border-circle uk-padding-small"></span></a></li>
+				<li class="uk-visible@l">
 					<a  uk-tooltip = "Items"> <span uk-icon="icon:thumbnails" class="uk-margin-small-left uk-button-primary uk-box-shadow-small uk-border-circle uk-padding-small"></span></a>
 					<div class="uk-navbar-dropdown">
 						<ul class="uk-nav uk-navbar-nav">
@@ -132,7 +144,7 @@
 						</ul>
 					</div>
 				</li>
-				<li><a href="{{url('/gerant/profile')}}" uk-tooltip = "Settings"> <span uk-icon="icon:settings" class="uk-margin-small-left uk-button-primary uk-box-shadow-small uk-border-circle uk-padding-small"></span></a></li>
+				<li class="uk-visible@l"><a href="{{url('/gerant/profile')}}" uk-tooltip = "Settings"> <span uk-icon="icon:settings" class="uk-margin-small-left uk-button-primary uk-box-shadow-small uk-border-circle uk-padding-small"></span></a></li>
 				<li>
 					<a id="command-en-cours" href="#panier-content" uk-toggle> <span class="uk-button-primary uk-border-circle uk-padding-small uk-margin-small-left" uk-icon="icon:cart"></span>
 						<span id="panier" class="uk-badge"></span>
@@ -140,8 +152,8 @@
 					</a>
 				</li>
 				@else
-				<li><a href="{{url('/admin/dashboard')}}" uk-tooltip = "Dashboard"> <span uk-icon="icon:home" class="uk-margin-small-left uk-button-primary uk-box-shadow-small uk-border-circle uk-padding-small"></span></a></li>
-				<li>
+				<li class="uk-visible@l"><a href="{{url('/admin/dashboard')}}" uk-tooltip = "Dashboard"> <span uk-icon="icon:home" class="uk-margin-small-left uk-button-primary uk-box-shadow-small uk-border-circle uk-padding-small"></span></a></li>
+				<li class="uk-visible@l">
 					<a uk-tooltip = "Items"> <span uk-icon="icon:thumbnails" class="uk-margin-small-left uk-button-primary uk-box-shadow-small uk-border-circle uk-padding-small"></span></a>
 					<div class="uk-navbar-dropdown">
 						<ul class="uk-nav uk-navbar-nav">
@@ -153,7 +165,7 @@
 						</ul>
 					</div>
 				</li>
-				<li>
+				<li class="uk-visible@l">
 					<a href="{{url('')}}" uk-tooltip = "Shops"> <span uk-icon="icon:users" class="uk-margin-small-left uk-button-primary uk-box-shadow-small uk-border-circle uk-padding-small"></span></a>
 					<div class="uk-navbar-dropdown">
 						<ul class="uk-nav uk-navbar-nav">
@@ -163,8 +175,8 @@
 						</ul>
 					</div>
 				</li>
-				<li><a href="{{url('/admin/bilan')}}" uk-tooltip = "Bilan"> <span uk-icon="icon:future" class="uk-margin-small-left uk-button-primary uk-box-shadow-small uk-border-circle uk-padding-small"></span></a></li>
-				<li>
+				<li class="uk-visible@l"><a href="{{url('/admin/bilan')}}" uk-tooltip = "Bilan"> <span uk-icon="icon:future" class="uk-margin-small-left uk-button-primary uk-box-shadow-small uk-border-circle uk-padding-small"></span></a></li>
+				<li class="uk-visible@l">
 					<a href="{{url('/admin/profile')}}" uk-tooltip = "Settings"> <span uk-icon="icon:settings" class="uk-margin-small-left uk-button-primary uk-box-shadow-small uk-border-circle uk-padding-small"></span></a>
 				</li>
 				@endif
