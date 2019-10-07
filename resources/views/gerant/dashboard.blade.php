@@ -4,8 +4,8 @@ Dashboard
 @endsection
 @section('gerant_contents')
 <div class="uk-container uk-margin-small">
-	<h3 class="uk-h3 uk-visible@m">Dashboard</h3>
-	<div class="uk-grid-small uk-child-width-1-4@m uk-visible@m" uk-grid>
+	<h3 class="uk-h3">Dashboard</h3>
+	<div class="uk-grid-small uk-child-width-1-1@s uk-child-width-1-3@m" uk-grid>
 		<div>
 			<div class="uk-card uk-card-default uk-card-primary uk-border-rounded uk-box-shadow-small">
 			    <div class="uk-card-header">
@@ -37,29 +37,6 @@ Dashboard
 			</div>
 		</div>
 	</div>
-
-	<div class="uk-child-width-1-2@m uk-hidden@m uk-margin-xlarge-top" uk-grid>
-		<div>
-			<div class="uk-card uk-card-primary">
-			    <div class="uk-card-header">
-			        <h3 class="uk-card-title uk-text-center">COMMANDES <span uk-icon="icon:cart;ratio:2"></span></h3>
-			    </div>
-			    <div class="uk-card-body">
-			    	<h4 class="uk-h1 uk-text-center">{{$command}}</h4>
-			    </div>
-			</div>
-		</div>
-		<div>
-			<div class="uk-card uk-card-primary">
-			    <div class="uk-card-header">
-			        <h3 class="uk-card-title uk-text-center">CASH (GNF)</h3>
-			    </div>
-			    <div class="uk-card-body">
-			    	<h4 class="uk-h1 uk-text-center">{{$cash}}</h4>
-			    </div>
-			</div>
-		</div>
-	</div>
 </div>
 <!-- TOUS LES PRODUITS -->
 <div class="uk-container">
@@ -74,7 +51,7 @@ Dashboard
 				{!!Form::close()!!}
 			</div>
 		</div>
-		<table class="uk-table uk-table-justify uk-table-striped">
+		<table class="uk-table uk-table-justify uk-table-responsive uk-table-striped">
 	    <thead>
 	        <tr>
 	            <th>Item</th>

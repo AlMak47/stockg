@@ -28,7 +28,7 @@ Entry stock
 			</div>
 	</div>
 		<!-- <div class="loader" uk-spinner></div> -->
-		<table class="uk-table uk-table-justify uk-table-striped" >
+		<table class="uk-table uk-table-justify uk-table-responsive uk-table-striped" >
 	    <thead>
 	        <tr>
 	            <th>Libelle</th>

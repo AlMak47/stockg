@@ -5,7 +5,7 @@ Dashboard
 @section('admin_contents')
 <div class="uk-container">
 	<div class="uk-h3">Dashboard </div>
-	<div class="uk-grid-small uk-child-width-1-4@m" uk-grid>
+	<div class="uk-grid-small uk-child-width-1-2@m uk-child-width-1-4@l" uk-grid>
 		<div>
 				<div class="uk-card uk-card-default uk-card-primary uk-border-rounded">
 			    <div class="uk-card-header">

@@ -99,7 +99,7 @@ $adminPage.createTableRow = function (sdata,champs=null,table,options,dashOption
 		 };
 
 		 $adminPage.getAction = function (options=1,td,link,dashOption=false) {
-		 		var linkEdit = $("<a></a>");linkEdit.addClass('uk-button uk-button-link uk-text-capitalize');
+		 		var linkEdit = $("<a></a>");linkEdit.addClass('uk-button uk-padding-remove uk-border-rounded uk-button-primary uk-text-capitalize uk-width-1-1@s uk-width-1-1@m');
 				var linkDetails = linkEdit.clone();
 		 	if(options==1) {
 		 		// make edit button
@@ -304,7 +304,9 @@ $adminPage.createTableDataCommand = function (sdata,champs=null,table,opt=true) 
 						td[3].append(badge);
 						// td[4].addClass('uk-text-right');
 						td[4].append(sdata[i].cash);
-						var details = $("<a></a>"); details.text('details');
+						var details = $("<a></a>");
+						details.addClass('uk-button uk-button-primary  uk-border-rounded uk-text-capitalize')
+						details.text('details');
 						details.attr('href','command/'+sdata[i].code_command);
 						if(!opt) {
 							details.attr('href',sdata[i].code_command);

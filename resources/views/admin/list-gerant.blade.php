@@ -14,7 +14,7 @@ Shop List
 			</p>
 		</div>
 		@endif
-		<table class="uk-table uk-table-justify uk-table-striped">
+		<table class="uk-table uk-table-justify uk-table-responsive uk-table-striped">
 	    <thead>
 	        <tr>
 	            <th>Username</th>
@@ -38,9 +38,9 @@ Shop List
 	    		<td>{{$values->statut}}</td>
 	    		<td>{{$values->phone}}</td>
 					@if($values->state == 'unblocked')
-	    		<td><a class="bloque-user uk-button-danger uk-border-rounded uk-box-shadow-small" href="#block-user" id="{{$values->username}}" uk-toggle="target: #my-id"><span uk-icon="icon:lock"></span> bloquer</a></td>
+	    		<td><a class="bloque-user uk-button uk-text-capitalize uk-button-danger uk-border-rounded" href="#block-user" id="{{$values->username}}" uk-toggle="target: #my-id"><span uk-icon="icon:lock"></span> bloquer</a></td>
 					@else
-	    		<td><a class="bloque-user uk-alert-success uk-border-rounded uk-box-shadow-small" href="#unblock-user" id="{{$values->username}}" uk-toggle="target: #my-id"><span uk-icon="icon:unlock"></span> debloquer</a></td>
+	    		<td><a class="bloque-user uk-button-default uk-button uk-text-capitalize uk-alert-success uk-border-rounded" href="#unblock-user" id="{{$values->username}}" uk-toggle="target: #my-id"><span uk-icon="icon:unlock"></span> debloquer</a></td>
 					@endif
 	    		<td><a href=""></a></td>
 	    	</tr>

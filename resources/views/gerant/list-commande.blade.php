@@ -3,12 +3,6 @@
 Command
 @endsection
 @section('gerant_contents')
-<div class="uk-container uk-hidden@m" style="margin-top:100px !important;">
-	<h3 class="uk-h1"><span uk-icon="icon:grid;ratio:2"></span> List Command <span class="uk-align-right uk-h4"><span uk-icon="icon:location;ratio:0.8"></span> {{$boutique}} </span>
-		<span class="uk-h4 uk-align-right">{{$date}}</span></h3>
-</div>
-<!-- TOUS LES PRODUITS -->
-
 <div class="uk-container">
 	<h3 class="uk-h3"> List Command</h3>
 		<hr class="uk-divider-small">
@@ -24,7 +18,7 @@ Command
 					{!!Form::text('date_fin',null,['class'=>'uk-input select_date uk-border-rounded','placeholder'=>'Au'])!!}
 				</div>
 				<div class="uk-width-1-5@s">
-				{!!Form::submit('Ok',['class'=>'uk-button uk-button-primary uk-border-rounded uk-box-shadow-small','id'=>'btn-submit'])!!}
+				{!!Form::submit('Ok',['class'=>'uk-button uk-button-primary uk-border-rounded uk-box-shadow-small uk-width-1-1@s','id'=>'btn-submit'])!!}
 				</div>
 				{!!Form::close()!!}
 			</div>

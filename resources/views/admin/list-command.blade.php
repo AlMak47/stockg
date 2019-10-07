@@ -22,21 +22,23 @@ List Commmand
 			<div>
 				<h1 class="uk-h5"><span uk-icon="icon:calendar;ratio:0.7"></span> Filter by date</h1>
 				{!!Form::open(['url'=>'admin/list-command/filter-by-date','class'=>'uk-grid-small','uk-grid','id'=>'filter-date'])!!}
-				<div class="uk-width-2-5@s">
+				<div class="uk-width-2-4@s uk-width-2-5@m">
 					{!!Form::text('date_depart',null,['class'=>'uk-input select_date uk-border-rounded','placeholder'=>'Du'])!!}
 				</div>
-				<div class="uk-width-2-5@s">
+				<div class="uk-width-2-4@s uk-width-2-5@m">
 					{!!Form::text('date_fin',null,['class'=>'uk-input select_date uk-border-rounded','placeholder'=>'Au'])!!}
 				</div>
-				<div class="uk-width-1-5@s">
+				<div class="uk-width-1-5@s uk-visible@m">
 				{!!Form::submit('Ok',['class'=>'uk-button uk-button-primary uk-box-shadow-small uk-border-rounded'])!!}
 				</div>
-
+				<div class="uk-width-1-1@s uk-hidden@m">
+					{!!Form::submit('Ok',['class'=>'uk-button uk-button-primary uk-box-shadow-small uk-width-1-1 uk-border-rounded'])!!}
+				</div>
 				{!!Form::close()!!}
 			</div>
 		</div>
 		<div id="loading" uk-spinner></div>
-		<table class="uk-table uk-table-justify uk-table-striped">
+		<table class="uk-table uk-table-justify uk-table-responsive uk-table-striped">
 			<thead>
 				<tr>
 					<th>Code</th>

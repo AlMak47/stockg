@@ -58,8 +58,11 @@ Add Item
           <button class="uk-button-primary uk-padding-small uk-border-circle uk-icon-link" uk-icon="icon:image" type="button" tabindex="-1"></button>
       </div>
 		</div>
-		<div class="">
+		<div class="uk-visible@m">
 			{!!Form::submit('Envoyer',['class'=>'uk-button uk-button-primary uk-border-rounded uk-box-shadow-small'])!!}
+		</div>
+		<div class="uk-hidden@m">
+			{!!Form::submit('Envoyer',['class'=>'uk-button uk-button-primary uk-width-1-1 uk-border-rounded uk-box-shadow-small'])!!}
 		</div>
 		{!!Form::close()!!}
 

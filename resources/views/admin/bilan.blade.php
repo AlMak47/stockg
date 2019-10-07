@@ -29,8 +29,11 @@ Bilan
 					<div class="uk-width-2-5@s">
 						{!!Form::text('date_fin',null,['class'=>'uk-input select_date uk-border-rounded','placeholder'=>'Au','id'=>'date_fin'])!!}
 					</div>
-					<div class="uk-width-1-5@s">
+					<div class="uk-width-1-5@s uk-visible@m">
 					{!!Form::submit('Ok',['class'=>'uk-button uk-button-primary uk-border-rounded uk-box-shadow-small'])!!}
+					</div>
+					<div class="uk-width-1-5@s uk-hidden@m">
+					{!!Form::submit('Ok',['class'=>'uk-button uk-button-primary uk-border-rounded uk-box-shadow-small uk-width-1-1'])!!}
 					</div>
 
 					{!!Form::close()!!}

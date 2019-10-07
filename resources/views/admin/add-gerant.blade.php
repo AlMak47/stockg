@@ -25,7 +25,8 @@ Add Shop
 			{!!Form::hidden('username',str_random(6))!!}
 			{!!Form::hidden('password','stockg')!!}
 			{!!Form::hidden('password_confirmation','stockg')!!}
-			{!!Form::submit('Ajouter',['class'=>'uk-button uk-button-primary uk-border-rounded uk-box-shadow-small'])!!}
+			{!!Form::submit('Ajouter',['class'=>'uk-button uk-button-primary uk-border-rounded uk-box-shadow-small uk-visible@m'])!!}
+			{!!Form::submit('Ajouter',['class'=>'uk-button uk-button-primary uk-border-rounded uk-box-shadow-small uk-width-1-1 uk-hidden@m'])!!}
 		{!!Form::close()!!}
 	<!--  -->
 </div>

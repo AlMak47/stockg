@@ -44,7 +44,7 @@ Edit Item
           <button class="uk-button-primary uk-padding-small uk-border-circle uk-icon-link" uk-icon="icon:image" type="button" tabindex="-1"></button>
       </div>
 		</div>
-		{!!Form::submit('Envoyer',['class'=>'uk-button uk-button-primary uk-border-rounded uk-box-shadow-small'])!!}
+		{!!Form::submit('Envoyer',['class'=>'uk-button uk-button-primary uk-border-rounded uk-box-shadow-small uk-width-1-1@s uk-width-1-6@m'])!!}
 		{!!Form::close()!!}
 
 </div>

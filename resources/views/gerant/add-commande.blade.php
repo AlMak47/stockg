@@ -5,29 +5,22 @@ New Command
 @endsection
 @section('gerant_contents')
 
-<div class="uk-container uk-hidden@m" style="margin-top:100px !important;">
-	<h3 class="uk-h1"><span uk-icon="icon:grid;ratio:2"></span> Add Command <span class="uk-align-right uk-h4"><span uk-icon="icon:location;ratio:0.8"></span> {{$boutique}} </span></h3>
-</div>
-<!-- TOUS LES PRODUITS -->
-
 <div class="uk-container">
 	<h3 class="uk-h3">Add Command </h3>
 		<hr class="uk-divider-small">
-		<!-- <div class="uk-alert uk-alert-infos" id="zone-infos"></div> -->
-
 		@if(!session()->exists('command_en_cours'))
 		{!!Form::open(['url'=>'gerant/command/new-command','id'=>'new-command'])!!}
-		{!!Form::submit('New command',['class'=>'uk-button uk-button-primary uk-border-rounded uk-box-shadow-small'])!!}
+		{!!Form::submit('New command',['class'=>'uk-button uk-button-primary uk-border-rounded uk-box-shadow-small uk-width-1-1@s uk-width-1-6@m uk'])!!}
 		{!!Form::close()!!}
 		@endif
 
-		<table class="uk-table uk-table-justify uk-table-striped">
+		<table class="uk-table uk-table-justify uk-table-responsive uk-table-striped">
 	    <thead>
-	            <th>Libelle</th>
-	            <th>Quantite</th>
-	            <th>Prix Unitaire</th>
-	            <th>Photos</th>
-	            <th colspan="2">Action</th>
+	            <th>Item</th>
+	            <th>Quantity</th>
+	            <th>Unit Price</th>
+	            <th>Image</th>
+	            <th colspan="2">-</th>
 	    </thead>
 	    <tbody id="list-item"></tbody>
 	</table>

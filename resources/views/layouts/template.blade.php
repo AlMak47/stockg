@@ -101,7 +101,7 @@
     </div>
     <div class="uk-navbar-right uk-dark">
     	<ul class="uk-navbar-nav">
-				<li class="uk-visible@l"><a> {{$date}} <span uk-icon="icon:calendar" class="uk-margin-small-left uk-button-primary uk-box-shadow-small uk-border-circle uk-padding-small"></span></a></li>
+				<li class="uk-visible@m"><a> {{$date}} <span uk-icon="icon:calendar" class="uk-margin-small-left uk-button-primary uk-box-shadow-small uk-border-circle uk-padding-small"></span></a></li>
 				@if(Auth::user()->statut == "gerant")
     		<!-- <li class="uk-visible@l"><a> {{$boutique}} <span uk-icon="icon:location" class="uk-margin-small-left uk-button-primary uk-box-shadow-small uk-border-circle uk-padding-small"></span></a></li> -->
 				<li>
@@ -133,8 +133,8 @@
 			<ul class="uk-navbar-nav">
 				<!-- USER ONLY -->
 				@if(Auth::user()->statut==="gerant")
-				<li class="uk-visible@l"><a href="{{url('/gerant/dashboard')}}" uk-tooltip = "Dashboard"> <span uk-icon="icon:home" class="uk-margin-small-left uk-button-primary uk-box-shadow-small uk-border-circle uk-padding-small"></span></a></li>
-				<li class="uk-visible@l">
+				<li class="uk-visible@m"><a href="{{url('/gerant/dashboard')}}" uk-tooltip = "Dashboard"> <span uk-icon="icon:home" class="uk-margin-small-left uk-button-primary uk-box-shadow-small uk-border-circle uk-padding-small"></span></a></li>
+				<li class="uk-visible@m">
 					<a  uk-tooltip = "Items"> <span uk-icon="icon:thumbnails" class="uk-margin-small-left uk-button-primary uk-box-shadow-small uk-border-circle uk-padding-small"></span></a>
 					<div class="uk-navbar-dropdown">
 						<ul class="uk-nav uk-navbar-nav">
@@ -152,8 +152,8 @@
 					</a>
 				</li>
 				@else
-				<li class="uk-visible@l"><a href="{{url('/admin/dashboard')}}" uk-tooltip = "Dashboard"> <span uk-icon="icon:home" class="uk-margin-small-left uk-button-primary uk-box-shadow-small uk-border-circle uk-padding-small"></span></a></li>
-				<li class="uk-visible@l">
+				<li class="uk-visible@m"><a href="{{url('/admin/dashboard')}}" uk-tooltip = "Dashboard"> <span uk-icon="icon:home" class="uk-margin-small-left uk-button-primary uk-box-shadow-small uk-border-circle uk-padding-small"></span></a></li>
+				<li class="uk-visible@m">
 					<a uk-tooltip = "Items"> <span uk-icon="icon:thumbnails" class="uk-margin-small-left uk-button-primary uk-box-shadow-small uk-border-circle uk-padding-small"></span></a>
 					<div class="uk-navbar-dropdown">
 						<ul class="uk-nav uk-navbar-nav">
@@ -165,7 +165,7 @@
 						</ul>
 					</div>
 				</li>
-				<li class="uk-visible@l">
+				<li class="uk-visible@m">
 					<a href="{{url('')}}" uk-tooltip = "Shops"> <span uk-icon="icon:users" class="uk-margin-small-left uk-button-primary uk-box-shadow-small uk-border-circle uk-padding-small"></span></a>
 					<div class="uk-navbar-dropdown">
 						<ul class="uk-nav uk-navbar-nav">
@@ -175,8 +175,8 @@
 						</ul>
 					</div>
 				</li>
-				<li class="uk-visible@l"><a href="{{url('/admin/bilan')}}" uk-tooltip = "Bilan"> <span uk-icon="icon:future" class="uk-margin-small-left uk-button-primary uk-box-shadow-small uk-border-circle uk-padding-small"></span></a></li>
-				<li class="uk-visible@l">
+				<li class="uk-visible@m"><a href="{{url('/admin/bilan')}}" uk-tooltip = "Bilan"> <span uk-icon="icon:future" class="uk-margin-small-left uk-button-primary uk-box-shadow-small uk-border-circle uk-padding-small"></span></a></li>
+				<li class="uk-visible@m">
 					<a href="{{url('/admin/profile')}}" uk-tooltip = "Settings"> <span uk-icon="icon:settings" class="uk-margin-small-left uk-button-primary uk-box-shadow-small uk-border-circle uk-padding-small"></span></a>
 				</li>
 				@endif
