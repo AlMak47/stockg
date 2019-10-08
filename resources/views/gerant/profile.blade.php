@@ -44,7 +44,7 @@ Settings
 							</p>
 						</div>
 						@endif
-						{!!Form::open()!!}
+						{!!Form::open(['url'=>url()->current(),'id'=>'form-profile-gerant'])!!}
 						{!!Form::text('old_password','',['class'=>'uk-input uk-margin-small uk-border-rounded','placeholder'=>'Old Password'])!!}
 						{!!Form::password('new_password',['class'=>'uk-input uk-margin-small uk-border-rounded','placeholder'=>'New Password'])!!}
 						{!!Form::password('new_password_confirmation',['class'=>'uk-input uk-margin-small uk-border-rounded','placeholder'=>'Confirm new password'])!!}
@@ -62,6 +62,10 @@ Settings
 <script type="text/javascript">
 
 	$(function() {
+
+		$("#form-profile-gerant").on('submit',function () {
+			UIkit.modal("#loading").show()
+		})
 		// FINALISER LA COMMANDE
 		$adminPage.finaliseCommand("{{csrf_token()}}","finalise","");
 		$adminPage.getPanier("{{csrf_token()}}","{{url()->current()}}/"+"get-panier");

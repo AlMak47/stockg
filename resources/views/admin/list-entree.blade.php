@@ -6,7 +6,7 @@ Entry stock
 
 @section('admin_contents')
 
-<div class="uk-container">
+<div class="uk-container uk-container-large">
 	<h3 class="uk-h3">List Entree</h3>
 		<hr class="uk-divider-small">
 		<div class="uk-child-width-1-2@m" uk-grid>
@@ -28,7 +28,7 @@ Entry stock
 			</div>
 	</div>
 		<!-- <div class="loader" uk-spinner></div> -->
-		<table class="uk-table uk-table-justify uk-table-responsive uk-table-striped" >
+		<table class="uk-table uk-table-justify uk-table-small uk-table-hover uk-table-responsive uk-table-striped" >
 	    <thead>
 	        <tr>
 	            <th>Libelle</th>
@@ -36,7 +36,7 @@ Entry stock
 	            <th>Date</th>
 	            <th>PU (GNF)</th>
 	            <th>PA (GNF)</th>
-	            <th>Photo</th>
+	            <!-- <th>Photo</th> -->
 	            <th colspan="2">-</th>
 	        </tr>
 	    </thead>
@@ -67,7 +67,7 @@ Entry stock
 				success:function (sdata) {
 					// console.log(sdata);
 					loading.remove();
-					$adminPage.createTableRow(sdata,['libelle','quantite','date','prix_achat','prix_unitaire','photo','edit','details'],$("#list-item"));
+					$adminPage.createTableRow(sdata,['libelle','quantite','date','prix_achat','prix_unitaire','edit','details'],$("#list-item"));
 					$adminPage.showImage();
 					$('.edit-button').hide();
 				}
@@ -78,30 +78,19 @@ Entry stock
 
 		// FILTER BY BOUTIQUE
 		$("#filter-by-boutique").on('change',function () {
-			// console.log($("#list-item"));
-			console.log($("#filter-by-boutique").val());
+
+
 			if($(this).val() !== "all") {
 				loading.insertBefore($('#list-item'));
 				$("#list-item > tbody").html('');
 				$adminPage.getDataFormAjax($(this).val(),"{{csrf_token()}}",'entree',['libelle','quantite','prix_achat','prix_unitaire','photo','edit','details'],$("#list-item"),1);
 				loading.remove();
-
-				// $adminPage.createTableRow();
-				// recherche rapide
-				// $("#search").on('keyup',function() {
-				// 	$adminPage.findItem("{{csrf_token()}}","{{url()->current()}}/search-item",$("#filter-by-boutique").val(),$(this).val());
-				// });
 				// ===
 			} else {
 				$("#filterForm").submit();
 			}
 		});
 		// recherche rapide
-		// $("#search").on('keyup',function() {
-		// 	$adminPage.findItem("{{csrf_token()}}","{{url()->current()}}/search-item",'',$(this).val());
-		// });
-
-
 	});
 </script>
 @endsection

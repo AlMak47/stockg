@@ -52,7 +52,7 @@ Settings
 							</p>
 						</div>
 						@endif
-						{!!Form::open()!!}
+						{!!Form::open(['url'=>url()->current(),'id'=>'form-profile'])!!}
 						{!!Form::text('old_password','',['class'=>'uk-input uk-margin-small','placeholder'=>'Old Password'])!!}
 						{!!Form::password('new_password',['class'=>'uk-input uk-margin-small','placeholder'=>'New Password'])!!}
 						{!!Form::password('new_password_confirmation',['class'=>'uk-input uk-margin-small','placeholder'=>'Confirm new password'])!!}
@@ -71,7 +71,9 @@ Settings
 <script type="text/javascript">
 
 	$(function() {
-
+		$("#form-profile").on('submit',function () {
+			UIkit.modal("#loading").show()
+		})
 	});
 </script>
 @endsection

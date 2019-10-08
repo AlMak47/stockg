@@ -55,7 +55,6 @@ $adminPage.createTableRow = function (sdata,champs=null,table,options,dashOption
 					for(var i=0;i<sdata.length;i++) {
 						var td=[]
 						list[i]=$("<tr></tr>");
-						list[i].addClass('uk-animation-toggle');
 						for(var j=0;j<champs.length;j++) {
 							td[j] =$("<td></td>");
 						}
@@ -70,14 +69,7 @@ $adminPage.createTableRow = function (sdata,champs=null,table,options,dashOption
 						// link.attr('href','')
 
 						//
-						// var img = $('<img/>');
-						// img.addClass('uk-preserve-width'); img.attr('src',"{{asset('uploads/')}}"+'/'+sdata[i].photo);
-						var img = $('<span><span/>');img.addClass('uk-icon uk-icon-image item-img');
-						img.attr('uk-icon-image','ratio:2');
-						img.attr('id',sdata[i].photo);
-						// img.attr('style',"background-image : url({{asset('uploads/')}}"+"/"+sdata[i].photo+");");
-						// img.attr('src',"{{asset('uploads/')}}"+'/'+sdata[i].photo);
-						td[4].append(img);
+
 						for(var j=0;j<champs.length;j++) {
 							list[i].append(td[j]);
 						}
@@ -86,7 +78,6 @@ $adminPage.createTableRow = function (sdata,champs=null,table,options,dashOption
 							td[2].text(sdata[i].date);
 							td[3].text(sdata[i].prix_unitaire);
 							td[4].text(sdata[i].prix_achat);
-							td[5].append(img);
 						}
 
 						table.append(list[i]);
@@ -99,7 +90,7 @@ $adminPage.createTableRow = function (sdata,champs=null,table,options,dashOption
 		 };
 
 		 $adminPage.getAction = function (options=1,td,link,dashOption=false) {
-		 		var linkEdit = $("<a></a>");linkEdit.addClass('uk-button uk-padding-remove uk-border-rounded uk-button-primary uk-text-capitalize uk-width-1-1@s uk-width-1-1@m');
+		 		var linkEdit = $("<a></a>");linkEdit.addClass('uk-button uk-button-small uk-padding-remove uk-border-rounded uk-button-primary uk-text-capitalize uk-width-1-1@s uk-width-1-1@m');
 				var linkDetails = linkEdit.clone();
 		 	if(options==1) {
 		 		// make edit button
@@ -268,7 +259,6 @@ $adminPage.getListCommand = function (formToken,url,reference,opt=true) {
 			dataType : 'json'
 		})
 		.done(function (data) {
-			console.log(data);
 			$adminPage.createTableDataCommand(data,['code','date','boutique','status','cash',''],$("#list-command"),opt);
 		})
 		.fail(function (data) {
@@ -305,7 +295,7 @@ $adminPage.createTableDataCommand = function (sdata,champs=null,table,opt=true) 
 						// td[4].addClass('uk-text-right');
 						td[4].append(sdata[i].cash);
 						var details = $("<a></a>");
-						details.addClass('uk-button uk-button-primary  uk-border-rounded uk-text-capitalize')
+						details.addClass('uk-button uk-button-primary uk-button-small  uk-border-rounded uk-text-capitalize')
 						details.text('details');
 						details.attr('href','command/'+sdata[i].code_command);
 						if(!opt) {

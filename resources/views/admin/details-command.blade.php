@@ -13,7 +13,7 @@ Details Command
 			<span>Cash (GNF) : <span class="uk-text-lead">{{$total}}</span> </span> |
 			<span>Benefit (GNF) : <span class="uk-text-lead">{{$interet}}</span> </span>
 		</div>
-		<table class="uk-table uk-table-striped">
+		<table class="uk-table uk-table-hover uk-table-small uk-table-striped">
 			<thead>
 				<tr>
 					<th>Reference</th>

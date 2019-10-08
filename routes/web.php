@@ -20,6 +20,8 @@ Route::post('/connexion','Auth\LoginController@connexion');
 
 // no permission route
 Route::get('/no-permission','HomeController@noPermission');
+//
+
 // ROUTE D'ADMINISTRATION
 
 Route::middleware(['auth','state','admin'])->group(function () {
@@ -59,7 +61,8 @@ Route::middleware(['auth','state','admin'])->group(function () {
     // blocked unblocked user
     Route::post("admin/list-gerant/block-user",'AdminController@actionStateUser');
     Route::post('/admin/list-gerant/unblock-user','AdminController@actionStateUser');
-
+    // listing des ventes
+    Route::post('/admin/sales-list','AdminController@getSalesList');
 });
 
 // /////==========================

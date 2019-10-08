@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Arr;
 use Illuminate\Http\Request;
 use App\Http\Requests\UserRequest;
 use App\Http\Requests\BoutiqueRequest;
@@ -537,5 +538,27 @@ class AdminController extends Controller
         return $user;
       }
       return false;
+    }
+
+    // recuperation de la liste des ventes
+    public function getSalesList(Request $request) {
+      // command confirmer
+      $sorti = Sortis::all();
+      // sortie de produits dont les commandes sont confirmee
+      $items = [];
+      foreach ($sorti as $key => $value) {
+        $items[$key]['item'] = $value->produits()->libelle;
+        $items[$key]['quantite_commande'] = $value->quantite_commande ;
+        $items[$key]['pa'] = number_format($value->produits()->prix_achat);
+        $items[$key]['pu'] = number_format($value->produits()->prix_unitaire);
+        $date = new Carbon($value->created_at);
+        $items[$key]['date'] = $date->toDayDateTimeString();
+        $items[$key]['code_commande'] = $value->code_commande;
+        $items[$key]['shop'] = $value->command()->boutique;
+        $items[$key]['cash'] = number_format($value->produits()->prix_unitaire * $value->quantite_commande);
+        $items[$key]['benefit'] = number_format(($value->produits()->prix_unitaire - $value->produits()->prix_achat) * $value->quantite_commande );
+        // $items[$key]['image'] = $value->produits()->image;
+      }
+      return response()->json($items);
     }
 }

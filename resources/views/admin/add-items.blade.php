@@ -3,7 +3,7 @@
 Add Item
 @endsection
 @section('admin_contents')
-<div class="uk-container">
+<div class="uk-container uk-container-small">
 	<h3 class="uk-h3">Add Item</h3>
 		<hr class="uk-divider-small">
 

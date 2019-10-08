@@ -4,7 +4,7 @@ List Item
 @endsection
 @section('admin_contents')
 
-<div class="uk-container">
+<div class="uk-container uk-container-large">
 	<h3 class="uk-h3">List Items</h3>
 		<hr class="uk-divider-small">
 		<div class="uk-child-width-1-2@m" uk-grid>
@@ -26,7 +26,7 @@ List Item
 			</div>
 	</div>
 		<!-- <div class="loader" uk-spinner></div> -->
-		<table class="uk-table uk-table-justify uk-table-responsive uk-table-striped" >
+		<table class="uk-table uk-table-small uk-table-hover uk-table-justify uk-table-responsive uk-table-striped" >
 	    <thead>
 	        <tr>
 	            <th>Item</th>
@@ -44,9 +44,6 @@ List Item
 @endsection
 @section('script')
 <script type="text/javascript">
-		 // qt;
-
-
 	$(function () {
 		var loading = $("<div></div>");loading.attr('uk-spinner','');
 
