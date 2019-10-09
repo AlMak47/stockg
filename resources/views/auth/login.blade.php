@@ -2,6 +2,8 @@
 <html>
 <head>
     <title>{{config('app.name')}}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" href="{{asset('img/logo.png')}}" type="image/png" />
     <!-- UIkit CSS -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.0-rc.26/css/uikit.min.css" />
 
