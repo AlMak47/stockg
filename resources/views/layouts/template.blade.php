@@ -194,8 +194,8 @@
 			</div>
 </div>
 <!-- loading modal -->
-<div id="loading" uk-modal="esc-close:false ; bg-close : false;">
-	<div class="uk-modal-dialog uk-modal-body uk-border-rounded">
+<div id="loading" class="uk-flex-top" uk-modal="esc-close:false ; bg-close : false;">
+	<div class="uk-modal-dialog uk-modal-body uk-border-rounded uk-margin-auto-vertical">
 		<div class="uk-align-center uk-text-center" uk-spinner> In progress ... </div>
 	</div>
 </div>

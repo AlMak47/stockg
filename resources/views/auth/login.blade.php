@@ -45,7 +45,7 @@
       {!!Form::text('username',null,['class'=>'uk-input uk-margin-small','placeholder'=>'Enter Username'])!!}
       {!!Form::label("Password *")!!}
       {!!Form::password('password',['class'=>'uk-input uk-margin-small','placeholder'=>'Enter Password'])!!}
-      {!!Form::submit('Envoyer',['class'=>'uk-button uk-button-primary uk-border-rounded uk-box-shadow-small'])!!}
+      {!!Form::submit('Envoyer',['class'=>'uk-button uk-button-primary uk-border-rounded uk-box-shadow-small uk-width-1-1@s uk-width-1-3@m'])!!}
       {!!Form::close()!!}
     </div>
   </div>

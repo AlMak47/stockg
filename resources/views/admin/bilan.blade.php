@@ -24,10 +24,10 @@ Bilan
 					<h1 class="uk-h5"><span uk-icon="icon:calendar;ratio:0.7"></span> Filter by date</h1>
 					{!!Form::open(['url'=>'/admin/bilan/by-date','class'=>'uk-grid-small','uk-grid','id'=>'filter-date'])!!}
 					<div class="uk-width-2-5@s">
-						{!!Form::text('date_depart',null,['class'=>'uk-input select_date uk-border-rounded','placeholder'=>'Du','id'=>'date_depart'])!!}
+						{!!Form::text('date_depart',null,['class'=>'uk-input select_date uk-border-rounded','placeholder'=>'Du','id'=>'date_depart','required'=>''])!!}
 					</div>
 					<div class="uk-width-2-5@s">
-						{!!Form::text('date_fin',null,['class'=>'uk-input select_date uk-border-rounded','placeholder'=>'Au','id'=>'date_fin'])!!}
+						{!!Form::text('date_fin',null,['class'=>'uk-input select_date uk-border-rounded','placeholder'=>'Au','id'=>'date_fin','required'=>''])!!}
 					</div>
 					<div class="uk-width-1-5@s uk-visible@m">
 					{!!Form::submit('Ok',['class'=>'uk-button uk-button-primary uk-border-rounded uk-box-shadow-small'])!!}
@@ -96,7 +96,8 @@ Bilan
 					$("#entree").html(data.entree);
 				})
 				.fail(function (data) {
-					console.log(data)
+					alert(data.responseJSON.message)
+					$(location).attr('href',"{{url()->current()}}")
 				})
 			})
 
