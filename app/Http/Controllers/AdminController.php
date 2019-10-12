@@ -10,6 +10,7 @@ use App\Http\Requests\ProduitRequest;
 use App\Http\Requests\PasswordChangeRequest;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Str;
 use App\Traits\Similarity;
 use App\Boutique;
 use App\User;
@@ -439,7 +440,6 @@ class AdminController extends Controller
       $edit = Produits::find($request->input('reference'));
         if($request->hasFile('image')) {
             // l'image existe
-
           if(File::exists(config('image.path').'/'.$edit->image)) {
             if(File::delete(config('image.path').'/'.$edit->image)) {
               if($request->file('image')->move(config('image.path'),$edit->image)) {
@@ -455,6 +455,7 @@ class AdminController extends Controller
             }
           } else {
             // le fichier image n'existe pas
+            $edit->image = $edit->image == "null" ? Str::random(10).'.'.$request->file("image")->getClientOriginalExtension() : $edit->image ;
             if($request->file('image')->move(config('image.path'),$edit->image)) {
               $edit->libelle = $request->input('libelle');
               $edit->prix_achat = $request->input('prix_achat');

@@ -21,7 +21,7 @@ Route::post('/connexion','Auth\LoginController@connexion');
 // no permission route
 Route::get('/no-permission','HomeController@noPermission');
 //route pour le changement de langue
-Route::name('language')->get('{lang}','HomeController@language');
+Route::name('language')->get('/language/{lang}','HomeController@language');
 
 // ROUTE D'ADMINISTRATION
 

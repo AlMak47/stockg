@@ -26,8 +26,9 @@ class ProduitController extends Controller
                 $nom=str_random(10).'.'.$extension;
             } while(file_exists($chemin.'/'.$nom));
 
+            return ['chemin'=>$chemin,'filename'=>$nom];
         }
-        return ['chemin'=>$chemin,'filename'=>$nom];
+
     }
 
     //

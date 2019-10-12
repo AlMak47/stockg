@@ -208,7 +208,7 @@
 
 @foreach(config('app.locales') as $locale)
 @if($locale != session('locale') )
-<a href="{{url($locale)}}" uk-tooltip="{{$locale}}" class="uk-border-rounded uk-box-shadow-small lang"><img src="{!!asset('img/'.$locale.'.svg')!!}" class="uk-icon-image" alt="">	</a>
+<a href="{{url('/language',[$locale])}}" uk-tooltip="{{$locale}}" class="uk-border-rounded uk-box-shadow-small lang"><img src="{!!asset('img/'.$locale.'.svg')!!}" class="uk-icon-image" alt="">	</a>
 @endif
 @endforeach
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
