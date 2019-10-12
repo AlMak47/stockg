@@ -24,4 +24,10 @@ class HomeController extends Controller
     public function noPermission() {
       return view("no-permission");
     }
+
+    public function language(String $locale){
+        $locale = in_array($locale,config('app.locales')) ? $locale : config('app.fallback_locale');
+        session(['locale' =>  $locale]);
+        return back();
+    }
 }

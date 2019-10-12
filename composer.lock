@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "e0210bc0a0c2e74c53f49823fd74a74e",
+    "content-hash": "53efeec952e01be0e43c782f9881f36a",
     "packages": [
         {
             "name": "dnoegel/php-xdg-base-dir",
@@ -3000,6 +3000,52 @@
         }
     ],
     "packages-dev": [
+        {
+            "name": "bestmomo/laravel5-artisan-language",
+            "version": "V0.1.5",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/bestmomo/laravel-artisan-language.git",
+                "reference": "05236c0de3333928fba98380f9b0bdeb95045b32"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/bestmomo/laravel-artisan-language/zipball/05236c0de3333928fba98380f9b0bdeb95045b32",
+                "reference": "05236c0de3333928fba98380f9b0bdeb95045b32",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/support": "^5.4|^6",
+                "php": ">=5.6.4"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Bestmomo\\ArtisanLanguage\\ArtisanLanguageProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Bestmomo\\ArtisanLanguage\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Bestmomo",
+                    "email": "grandheretique@free.fr",
+                    "homepage": "http://laravel.sillo.org"
+                }
+            ],
+            "description": "Add artisan commands for language strings",
+            "homepage": "https://github.com/bestmomo/laravel-artisan-language",
+            "time": "2019-10-03T21:46:33+00:00"
+        },
         {
             "name": "doctrine/instantiator",
             "version": "1.2.0",

@@ -1,14 +1,14 @@
 @extends('layouts.app_admin')
 @section('title')
-Add Item
+{{__("Add Item")}}
 @endsection
 @section('admin_contents')
 <div class="uk-container uk-container-small">
-	<h3 class="uk-h3">Add Item</h3>
+	<h3 class="uk-h3">{{__("Add Item")}}</h3>
 		<hr class="uk-divider-small">
 
 		<div class="uk-alert uk-alert-info uk-box-shadow-small uk-border-rounded" id="info-exist" style="display: none;">
-			<p><span uk-icon="icon:info;ratio:1.2"></span> Ce Produit Existe deja ! Pour l'ajouter a un stock , saisissez juste la quantite</p>
+			<p><span uk-icon="icon:info;ratio:1.2"></span> {{__("This Product Already exists! To add a stock, just enter the quantity")}}</p>
 		</div>
 
 		@if(session('success'))
@@ -32,37 +32,37 @@ Add Item
 		@endif
 		<div class="uk-alert-info uk-box-shadow-small uk-border-rounded" uk-alert>
 			<a href="#" class="uk-alert-close" uk-close></a>
-			<p>(*) Champs Obligatoires</p>
+			<p>(*) {{__('Champs Obligatoires')}}</p>
 		</div>
 		{!!Form::open(['url'=>'admin/add-item','enctype'=>'multipart/form-data','id'=>'add-form'])!!}
 		{!!Form::label('Shop *')!!}
-		<select name="boutiques" class="uk-select uk-border-rounded">
-			<option value="">--Select Boutique--</option>
+		<select name="boutiques" class="uk-select uk-border-rounded uk-margin-small">
+			<option value="">--{{__("Select Shop")}}--</option>
 			@foreach($bouti as $values)
 			<option value="{{$values->localisation}}">{{$values->localisation}}</option>
 			@endforeach
 		</select>
 		{!!Form::hidden('reference','IT'.time())!!}
-		{!!Form::label('Item Name *')!!}
-		{!!Form::text('libelle',null,['class'=>'uk-input uk-margin-small uk-border-rounded','placeholder'=>'Item Name','id'=>'item-name'])!!}
-		{!!Form::label("Buying Price *")!!}
-		{!!Form::text('prix_achat',0,['class'=>'uk-input uk-margin-small zone-hide uk-border-rounded','placeholder'=>'Prix achat','id'=>'prix-achat'])!!}
-		{!!Form::label("Unit Price *")!!}
-		{!!Form::text('prix_unitaire',0,['class'=>'uk-input uk-margin-small zone-hide uk-border-rounded','placeholder'=>'Unit Price','id'=>'prix-unitaire'])!!}
-		{!!Form::label("Quantity *")!!}
-		{!!Form::number('quantite',null,['class'=>'uk-input uk-margin-small uk-border-rounded','placeholder'=>'Quantity','id'=>'quantity'])!!}
+		{!!Form::label(__("Item Name").' *')!!}
+		{!!Form::text('libelle',null,['class'=>'uk-input uk-margin-small uk-border-rounded','placeholder'=>__("Item Name"),'id'=>'item-name'])!!}
+		{!!Form::label('prix_achat',__("Buying Price")."*",['class'=>'zone-hide'])!!}
+		{!!Form::text('prix_achat',0,['class'=>'uk-input uk-margin-small zone-hide uk-border-rounded','placeholder'=>__('Buying Price'),'id'=>'prix-achat'])!!}
+		{!!Form::label('prix_unitaire',__('Unit Price')."*",['class'=>'zone-hide'])!!}
+		{!!Form::text('prix_unitaire',0,['class'=>'uk-input uk-margin-small zone-hide uk-border-rounded','placeholder'=>__("Unit Price"),'id'=>'prix-unitaire'])!!}
+		{!!Form::label(__("Quantity")."*")!!}
+		{!!Form::number('quantite',null,['class'=>'uk-input uk-margin-small uk-border-rounded','placeholder'=>__("Quantity"),'id'=>'quantity'])!!}
 		<div class="uk-margin-small">
-			{!!Form::label("Select Image *")!!}
+			{!!Form::label(__("Select Image")."*")!!}
       <div uk-form-custom>
 				{!!Form::file('image')!!}
           <button class="uk-button-primary uk-padding-small uk-border-circle uk-icon-link" uk-icon="icon:image" type="button" tabindex="-1"></button>
       </div>
 		</div>
 		<div class="uk-visible@m">
-			{!!Form::submit('Envoyer',['class'=>'uk-button uk-button-primary uk-border-rounded uk-box-shadow-small'])!!}
+			{!!Form::submit(__("Submit"),['class'=>'uk-button uk-button-primary uk-border-rounded uk-box-shadow-small'])!!}
 		</div>
 		<div class="uk-hidden@m">
-			{!!Form::submit('Envoyer',['class'=>'uk-button uk-button-primary uk-width-1-1 uk-border-rounded uk-box-shadow-small'])!!}
+			{!!Form::submit(__("Submit"),['class'=>'uk-button uk-button-primary uk-width-1-1 uk-border-rounded uk-box-shadow-small'])!!}
 		</div>
 		{!!Form::close()!!}
 

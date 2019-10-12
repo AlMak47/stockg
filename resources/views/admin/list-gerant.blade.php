@@ -1,11 +1,11 @@
 @extends('layouts.app_admin')
 @section('title')
-Shop List
+{{__("Shop List")}}
 @endsection
 @section('admin_contents')
 
 <div class="uk-container">
-	<h3 class="uk-h3"> List Users </h3>
+	<h3 class="uk-h3"> {{__("List Shop")}} </h3>
 		<hr class="uk-divider-small">
 		@if(session()->has('msg'))
 		<div class="uk-alert uk-alert-success">
@@ -17,12 +17,12 @@ Shop List
 		<table id="gerant" class="uk-table uk-table-justify uk-table-small uk-table-responsive uk-table-striped">
 	    <thead>
 	        <tr>
-	            <th>Username</th>
-	            <th>Boutique</th>
-	            <th>Email</th>
-	            <th>Statut</th>
-	            <th>Phone</th>
-	            <th>Verouiller</th>
+	            <th>{{__("Username")}}</th>
+	            <th>{{__("Shop")}}</th>
+	            <th>{{__("Email")}}</th>
+	            <th>{{__("Permission")}}</th>
+	            <th>{{__("Phone")}}</th>
+	            <th>{{__("State")}}</th>
 	        </tr>
 	    </thead>
 	    <tbody>

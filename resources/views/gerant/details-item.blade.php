@@ -12,7 +12,7 @@ Details Item
 		<hr class="uk-divider-small">
 
 		<div class="uk-grid-match uk-child-width-1-2@m" uk-grid>
-			<div><img src="{{asset('uploads/'.$details[0]->image)}}" class="uk-width-small uk-border-rounded uk-box-shadow-small" uk-img></div>
+			<div><img src="{{asset('uploads/'.$details[0]->image)}}" class="uk-width-medium uk-height-medium uk-border-rounded uk-box-shadow-small" uk-img></div>
 			<div>
 				<ul class="uk-list uk-list-divider">
 					<li>Reference : {{$details[0]->reference}}</li>

@@ -93,6 +93,8 @@ return [
 
     'fallback_locale' => 'en',
 
+    'locales' => ['en','fr'] ,
+
     /*
     |--------------------------------------------------------------------------
     | Encryption Key
@@ -176,6 +178,7 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
+        Bestmomo\ArtisanLanguage\ArtisanLanguageProvider::class,
 
     ],
 

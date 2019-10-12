@@ -1,10 +1,10 @@
 @extends('layouts.app_admin')
 @section('title')
-Add Shop
+{{__("Add Shop")}}
 @endsection
 @section('admin_contents')
 <div class="uk-container">
-	<h3 class="uk-h3">Add User </h3>
+	<h3 class="uk-h3">{{__("Add User")}} </h3>
 
 		<hr class="uk-divider-small">
 		@if($errors->any())
@@ -17,16 +17,18 @@ Add Shop
 		@endif
 
 	<!-- FORM ADD USER -->
-		<h4 class="uk-h3">User Infos</h4>
+		<h4 class="uk-h3">{{__("User Infos")}}</h4>
 		{!!Form::open(['url'=>'admin/add-gerant','id'=>'form-add-gerant'])!!}
-			{!!Form::email('email','',['class'=>'uk-input uk-margin-small uk-border-rounded','placeholder'=>'E-mail Adresse'])!!}
-			{!!Form::text('phone','',['class'=>'uk-input uk-margin-small uk-border-rounded','placeholder'=>'Telephon Number'])!!}
+			{!!Form::label('email',__("Email")." *")!!}
+			{!!Form::email('email','',['class'=>'uk-input uk-margin-small uk-border-rounded','placeholder'=>__("Email")])!!}
+			{!!Form::label('phone_number',__("Telephon Number")." *")!!}
+			{!!Form::text('phone','',['class'=>'uk-input uk-margin-small uk-border-rounded','placeholder'=>_("Telephone Number")])!!}
 			{!!Form::select('statut', ['gerant' => 'Simple User'], 'gerant',['class'=>'uk-select uk-margin-small uk-border-rounded'])!!}
 			{!!Form::hidden('username',str_random(6))!!}
 			{!!Form::hidden('password','stockg')!!}
 			{!!Form::hidden('password_confirmation','stockg')!!}
-			{!!Form::submit('Ajouter',['class'=>'uk-button uk-button-primary uk-border-rounded uk-box-shadow-small uk-visible@m'])!!}
-			{!!Form::submit('Ajouter',['class'=>'uk-button uk-button-primary uk-border-rounded uk-box-shadow-small uk-width-1-1 uk-hidden@m'])!!}
+			{!!Form::submit(__("Submit"),['class'=>'uk-button uk-button-primary uk-border-rounded uk-box-shadow-small uk-visible@m'])!!}
+			{!!Form::submit(__("Submit"),['class'=>'uk-button uk-button-primary uk-border-rounded uk-box-shadow-small uk-width-1-1 uk-hidden@m'])!!}
 		{!!Form::close()!!}
 	<!--  -->
 </div>

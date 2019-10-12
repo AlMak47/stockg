@@ -1,19 +1,19 @@
 @extends('layouts.app_admin')
 @section('title')
-List Item
+{{__("List Item")}}
 @endsection
 @section('admin_contents')
 
 <div class="uk-container uk-container-large">
-	<h3 class="uk-h3">List Items</h3>
+	<h3 class="uk-h3">{{__("List Item")}}</h3>
 		<hr class="uk-divider-small">
 		<div class="uk-child-width-1-2@m" uk-grid>
 			<div>
-				<h1 class="uk-h5"><span uk-icon="icon:location;ratio:0.7"></span> Filter by Shop</h1>
+				<h1 class="uk-h5"><span uk-icon="icon:location;ratio:0.7"></span> {{__("Filter by Shop")}}</h1>
 				{!!Form::open(['id'=>'filterForm'])!!}
 				{!!Form::close()!!}
 				<select name="boutique" class="uk-select uk-border-rounded" id="filter-by-boutique">
-					<option value="all">All</option>
+					<option value="all">{{__("All")}}</option>
 					@foreach($boutiques as $values)
 					<option value="{{$values->localisation}}">{{$values->localisation}}</option>
 					@endforeach
@@ -21,19 +21,19 @@ List Item
 
 			</div>
 			<div>
-				<h1 class="uk-h5"><span uk-icon="icon:search;ratio:0.7"></span> Search</h1>
-				{!!Form::search('search','',['class'=>'uk-input uk-border-rounded','placeholder'=>'Search','id'=>'search'])!!}
+				<h1 class="uk-h5"><span uk-icon="icon:search;ratio:0.7"></span> {{__("Search")}}</h1>
+				{!!Form::search('search','',['class'=>'uk-input uk-border-rounded','placeholder'=>__("Type a Search"),'id'=>"search"])!!}
 			</div>
 	</div>
-		<!-- <div class="loader" uk-spinner></div> -->
+
 		<table class="uk-table uk-table-small uk-table-hover uk-table-justify uk-table-responsive uk-table-striped" >
 	    <thead>
 	        <tr>
-	            <th>Item</th>
-	            <th>Quantite</th>
-	            <th>PU (GNF)</th>
-	            <th>PA (GNF)</th>
-	            <th>Image</th>
+	            <th>{{__("Item")}}</th>
+	            <th>{{__("Quantity")}}</th>
+	            <th>{{__("Unit Price (GNF)")}}</th>
+	            <th>{{__("Buying Price (GNF)")}}</th>
+	            <!-- <th>{{__("Image")}}</th> -->
 	            <th colspan="2">-</th>
 	        </tr>
 	    </thead>

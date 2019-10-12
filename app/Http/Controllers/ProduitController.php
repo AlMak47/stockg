@@ -35,31 +35,36 @@ class ProduitController extends Controller
 
         if($this->isNewItem($request->input('libelle'))) {
             // NOUVEAU PRODUIT
+            $stockage = new Stockage;
+            $item = new Produits;
+            $item->reference = $request->input('reference');
+            $item->libelle = $request->input('libelle');
+            $item->prix_achat = $request->input('prix_achat');
+            $item->prix_unitaire = $request->input('prix_unitaire');
+
+            $stockage->produit = $item->reference;
+            $stockage->boutiques = $request->input('boutiques');
+            $stockage->quantite = $request->input('quantite');
             if($request->hasFile('image')) {
               // l'image existe
-              $stockage = new Stockage;
-              $item = new Produits;
-              $item->reference = $request->input('reference');
-              $item->libelle = $request->input('libelle');
-              $item->prix_achat = $request->input('prix_achat');
-              $item->prix_unitaire = $request->input('prix_unitaire');
-
-              $stockage->produit = $item->reference;
-              $stockage->boutiques = $request->input('boutiques');
-              $stockage->quantite = $request->input('quantite');
               $tmp = $this->getImage($request->file('image'));
               if($request->file('image')->move($tmp['chemin'],$tmp['filename'])) {
                $item->image=$tmp['filename'];
                $item->save();
                $stockage->save();
                $this->addEntree($stockage->produit,$stockage->boutiques,$stockage->quantite);
-               return redirect('admin/add-item')->with('success',"Nouveau produit ajouter : `$item->libelle` au stock de : `$stockage->boutiques`");
+
              } else {
-               return redirect('admin/add-item')->with('error',"Erreur de telechargement de l'image");
+               return redirect('admin/add-item')->with('error',"Error , try again later..");
              }
            } else {
-             return redirect('admin/add-item')->with('error',"Select an Image");
+              // possibilite d'enregistrer un produit sans image
+              $item->image = "null";
+              $item->save();
+              $stockage->save();
+              $this->addEntree($stockage->produit,$stockage->boutiques,$stockage->quantite);
            }
+           return redirect('admin/add-item')->with('success',"New Item added : `$item->libelle` in : `$stockage->boutiques`");
     }
         //  ANCIEN PRODUIT
 
@@ -75,7 +80,7 @@ class ProduitController extends Controller
                             ->where('boutiques',$request->input('boutiques'))
                             ->update(['quantite' => $stockExistant->quantite]);
             $this->addEntree($stockExistant->produit,$stockExistant->boutiques,$stockExistant->quantite);
-            return redirect('admin/add-item')->with('success',"Vous avez ajouter ".$request->input('quantite')." $itemExist->libelle au stock de $stockExistant->boutiques");
+            return redirect('admin/add-item')->with('success',"Success ".$request->input('quantite')." $itemExist->libelle added to $stockExistant->boutiques");
         }
         else {
             // AJOUTER EN STOCK
@@ -87,9 +92,8 @@ class ProduitController extends Controller
             $stockage->quantite=$request->input('quantite');
             $stockage->save();
             $this->addEntree($stockage->produit,$stockage->boutiques,$stockage->quantite);
-            return redirect('admin/add-item')->with('success',"le produit $itemExist->libelle est Maintenant disponible dans le stock de $boutiques");
+            return redirect('admin/add-item')->with('success'," $itemExist->libelle is now available in $boutiques");
         }
-        return redirect('admin/add-item');
     }
     // ====
 

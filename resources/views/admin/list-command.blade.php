@@ -1,20 +1,20 @@
 @extends('layouts.app_admin')
 @section('title')
-List Commmand
+{{__("List Commmand")}}
 @endsection
 
 @section('admin_contents')
 <div class="uk-container uk-container-large">
 	<ul uk-tab>
-    <li><a href="#">List Command</a></li>
-    <li><a href="#">Sales List</a></li>
+    <li><a href="#">{{__("List Command")}}</a></li>
+    <li><a href="#">{{__("Sales List")}}</a></li>
 </ul>
 <div class="uk-grid-small uk-child-width-1-3@m" uk-grid>
 	<div>
 			<!-- filter by boutique -->
-			<h1 class="uk-h5"><span uk-icon="icon:location;ratio:0.7"></span> Filter by Boutique</h1>
+			<h1 class="uk-h5"><span uk-icon="icon:location;ratio:0.7"></span> {{__("Filter by shop")}}</h1>
 		<select name="boutique" class="uk-select uk-border-rounded" id="filter-by-boutique">
-			<option value="all">All</option>
+			<option value="all">{{__("All")}}</option>
 			@foreach($boutiques as $values)
 			<option value="{{$values->localisation}}">{{$values->localisation}}</option>
 			@endforeach
@@ -22,13 +22,13 @@ List Commmand
 	</div>
 
 	<div>
-		<h1 class="uk-h5"><span uk-icon="icon:calendar;ratio:0.7"></span> Filter by date</h1>
+		<h1 class="uk-h5"><span uk-icon="icon:calendar;ratio:0.7"></span> {{__("Filter by date")}}</h1>
 		{!!Form::open(['url'=>'admin/list-command/filter-by-date','class'=>'uk-grid-small','uk-grid','id'=>'filter-date'])!!}
 		<div class="uk-width-2-4@s uk-width-2-5@m">
-			{!!Form::text('date_depart',null,['class'=>'uk-input select_date uk-border-rounded','placeholder'=>'Du'])!!}
+			{!!Form::text('date_depart',null,['class'=>'uk-input select_date uk-border-rounded','placeholder'=>__("From")])!!}
 		</div>
 		<div class="uk-width-2-4@s uk-width-2-5@m">
-			{!!Form::text('date_fin',null,['class'=>'uk-input select_date uk-border-rounded','placeholder'=>'Au'])!!}
+			{!!Form::text('date_fin',null,['class'=>'uk-input select_date uk-border-rounded','placeholder'=>__("To")])!!}
 		</div>
 		<div class="uk-width-1-5@s uk-visible@m">
 		{!!Form::submit('Ok',['class'=>'uk-button uk-button-primary uk-box-shadow-small uk-border-rounded'])!!}
@@ -39,26 +39,26 @@ List Commmand
 		{!!Form::close()!!}
 	</div>
 	<div class="">
-		<h1 class="uk-h5"><span uk-icon="icon:search;ratio:0.7"></span> Search</h1>
+		<h1 class="uk-h5"><span uk-icon="icon:search;ratio:0.7"></span> {{__("Search")}}</h1>
 		{!!Form::open(['url'=>''])!!}
-		{!!Form::text('search_list_vente','',['class'=>'uk-input uk-border-rounded','placeholder'=>'Search ...'])!!}
+		{!!Form::text('search_list_vente','',['class'=>'uk-input uk-border-rounded','placeholder'=>__("Type a search")])!!}
 		{!!Form::close()!!}
 	</div>
 </div>
 <div id="loading" uk-spinner></div>
 <ul class="uk-switcher uk-margin">
     <li>
-			<h3 class="uk-h3"> List Command </h3>
+			<h3 class="uk-h3"> {{__("List Command")}} </h3>
 					<hr class="uk-divider-small">
 
 					<table class="uk-table uk-table-small uk-table-hover uk-table-justify uk-table-responsive uk-table-striped">
 						<thead>
 							<tr>
-								<th>Code</th>
-								<th>Date</th>
-								<th>Boutique</th>
-								<th>Status</th>
-								<th>Cash (GNF)</th>
+								<th>{{__("Id")}}</th>
+								<th>{{__("Date")}}</th>
+								<th>{{__("Shop")}}</th>
+								<th>{{__("State")}}</th>
+								<th>{{__("Cash")}} (GNF)</th>
 								<th>-</th>
 							</tr>
 						</thead>
@@ -68,20 +68,20 @@ List Commmand
 
 		</li>
     <li>
-			<h3 class="uk-h3"> Sales List</h3>
+			<h3 class="uk-h3"> {{__("Sales List")}}</h3>
 					<hr class="uk-divider-small">
 					<table  class="uk-table uk-table-small uk-table-justify uk-table-hover uk-table-responsive uk-table-striped">
 						<thead>
 							<tr>
-								<th class="">Item</th>
-								<th class="">Quantity</th>
-								<th class="">Buying Price</th>
-								<th class="">Unit Price</th>
-								<th class="">Date</th>
-								<th class="">IdCommande</th>
-								<th class="">Shop</th>
-								<th class="">Total</th>
-								<th class="">Benefit</th>
+								<th class="">{{__("Item")}}</th>
+								<th class="">{{__("Quantity")}}</th>
+								<th class="">{{__("Buying Price")}}</th>
+								<th class="">{{__("Unit Price")}}</th>
+								<th class="">{{__("Date")}}</th>
+								<th class="">{{__("IdCommande")}}</th>
+								<th class="">{{__("Shop")}}</th>
+								<th class="">{{__("Total")}}</th>
+								<th class="">{{__("Benefit")}}</th>
 								<!-- <th>Image</th> -->
 								<th>-</th>
 							</tr>
