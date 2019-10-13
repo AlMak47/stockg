@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+
 use Illuminate\Support\Arr;
 use Illuminate\Http\Request;
 use App\Http\Requests\UserRequest;
@@ -20,7 +22,11 @@ use App\Command;
 use Carbon\Carbon;
 use App\Sortis;
 use App\Entree;
-// use App\Produits;
+
+
+use App\Imports\ProduitsImport;
+use Maatwebsite\Excel\Facades\Excel;
+
 class AdminController extends Controller
 {
     //
@@ -561,5 +567,38 @@ class AdminController extends Controller
         // $items[$key]['image'] = $value->produits()->image;
       }
       return response()->json($items);
+    }
+
+    // importation des produits
+    public function importItem(Request $request) {
+      $validate = $request->validate([
+        'shop'  =>  'required|exists:boutique,localisation',
+        'fichier' =>  'required'
+      ]);
+      $collect = Excel::toCollection(new ProduitsImport,$request->file('fichier'));
+      dump($request);
+      dump($collect);
+
+      foreach($collect[0] as $key=>$c) {
+        // dump($key);
+        $ref = 'IT'.time();
+        DB::table('produits')->insertOrIgnore([
+          [
+            'reference' =>  $ref,
+            'libelle' =>  $c[0],
+            'prix_unitaire' =>  $c[1],
+            'prix_achat'  =>  $c[2],
+            'image' =>  'null'
+          ]
+        ]);
+        DB::table('stockage')->insertOrIgnore([
+          [
+            'produit' =>  $ref,
+            'boutiques' =>  $request->input('shop'),
+            'quantite'  =>  $c[3]
+          ]
+        ]);
+      }
+      return redirect('/admin/add-item')->withSuccess("Success!");
     }
 }

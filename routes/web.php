@@ -64,6 +64,8 @@ Route::middleware(['auth','state','admin'])->group(function () {
     Route::post('/admin/list-gerant/unblock-user','AdminController@actionStateUser');
     // listing des ventes
     Route::post('/admin/sales-list','AdminController@getSalesList');
+    // ajout des produits par importation d'un fichier excel
+    Route::post('/admin/import-item','AdminController@importItem');
 });
 
 // /////==========================
