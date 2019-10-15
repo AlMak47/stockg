@@ -14,7 +14,7 @@
 			</p>
 		</div>
 		@endif
-		<table id="gerant" class="uk-table uk-table-justify uk-table-small uk-table-responsive uk-table-striped">
+		<table id="gerant" class="uk-table uk-table-hover uk-table-small uk-table-responsive uk-table-striped">
 	    <thead>
 	        <tr>
 	            <th>{{__("Username")}}</th>

@@ -6,7 +6,9 @@ Dashboard
 <div class="uk-container">
 	<div class="uk-h3">{{__("Dashboard")}} </div>
 	<div class="uk-grid-small uk-child-width-1-2@m uk-child-width-1-4@l" uk-grid>
+
 		<div>
+			<a class="dashboard-link" href="{{url('/admin/list-command')}}">
 				<div class="uk-card uk-card-default uk-card-primary uk-border-rounded">
 			    <div class="uk-card-header">
 			        <h4 class="uk-card-title uk-text-center">{{__("COMMANDES")}} <span uk-icon="icon:grid;"></span></h4>
@@ -15,10 +17,11 @@ Dashboard
 						<h4 class="uk-h1 uk-text-center">{{$daycommand}}</h4>
 					</div>
 			</div>
+			</a>
 		</div>
 
 		<div>
-
+			<a class="dashboard-link" href="{{url('/admin/bilan')}}">
 				<div class="uk-card uk-card-default uk-card-primary uk-border-rounded">
 				    <div class="uk-card-header">
 				        <h3 class="uk-card-title uk-text-center">CASH (GNF) <span uk-icon="icon:credit-card;"></span></h3>
@@ -27,11 +30,11 @@ Dashboard
 				    	<h4 class="uk-h1 uk-text-center">{{$dcash}}</h4>
 				    </div>
 				</div>
-
+				</a>
 		</div>
 
 		<div>
-
+			<a class="dashboard-link" href="{{url('admin/list-gerant')}}">
 				<div class="uk-card uk-card-default uk-card-primary uk-border-rounded">
 				    <div class="uk-card-header">
 				        <h3 class="uk-card-title uk-text-center">{{__("SHOP")}} <span uk-icon="icon:location;ratio:"></span></h3>
@@ -40,10 +43,10 @@ Dashboard
 				    	<h4 class="uk-h1 uk-text-center">{{$shop}}</h4>
 				    </div>
 				</div>
-
+				</a>
 		</div>
 		<div>
-
+			<a class="dashboard-link" href="{{url('/admin/list-item')}}">
 				<div class="uk-card uk-card-default uk-card-primary uk-border-rounded">
 				    <div class="uk-card-header">
 				        <h3 class="uk-card-title uk-text-center">{{__("ITEMS")}} <span uk-icon="icon:list;ratio:"></span></h3>
@@ -52,7 +55,7 @@ Dashboard
 				    	<h4 class="uk-h1 uk-text-center">{{$items}}</h4>
 				    </div>
 				</div>
-
+				</a>
 		</div>
 	</div>
 </div>
