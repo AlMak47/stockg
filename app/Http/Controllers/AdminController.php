@@ -31,6 +31,7 @@ class AdminController extends Controller
 {
     //
     use Similarity;
+
     protected $_users,$daily_cash,$date,$dayCommand;
     public function __construct() {
         // $this->middleware('guest');
@@ -576,29 +577,32 @@ class AdminController extends Controller
         'fichier' =>  'required'
       ]);
       $collect = Excel::toCollection(new ProduitsImport,$request->file('fichier'));
-      dump($request);
-      dump($collect);
 
       foreach($collect[0] as $key=>$c) {
-        // dump($key);
-        $ref = 'IT'.time();
-        DB::table('produits')->insertOrIgnore([
-          [
-            'reference' =>  $ref,
-            'libelle' =>  $c[0],
-            'prix_unitaire' =>  $c[1],
-            'prix_achat'  =>  $c[2],
-            'image' =>  'null'
-          ]
-        ]);
-        DB::table('stockage')->insertOrIgnore([
-          [
-            'produit' =>  $ref,
-            'boutiques' =>  $request->input('shop'),
-            'quantite'  =>  $c[3]
-          ]
-        ]);
+
+        if($this->isNewItem($c[0])) {
+          // le produit est nouveau
+          echo "new";
+        } else {
+          //  le produit existe deja dans le system
+          $itemOld = Produits::where('libelle',$c[0])->first();
+          if($this->isInStock($itemOld->reference,$request->input('shop'))) {
+            // deja en stock augmenter la quantite
+          } else {
+            // pas en stock creer l'entree
+            $stockage = new Stockage;
+            $stockage->produit = $itemOld->reference;
+            $stockage->boutiques = $request->input('shop');
+            $stockage->quantite = $c[3];
+            dump($stockage);
+            dump($itemOld);
+            $stockage->save();
+            $this->addEntree($stockage->produit,$stockage->boutiques,$stockage->quantite);
+          }
+        }
+
       }
+      // die();
       return redirect('/admin/add-item')->withSuccess("Success!");
     }
 }

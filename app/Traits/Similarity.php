@@ -7,7 +7,38 @@ use App\Produits;
 use App\Stockage;
 use App\Sortis;
 use Carbon\Carbon;
+use App\Entree;
 trait Similarity {
+
+	    public function addEntree ($produit,$boutique,$quantite) {
+	        $entree = new Entree;
+	        $entree->produit = $produit;
+	        $entree->boutique = $boutique;
+	        $entree->quantite = $quantite;
+	        $entree->save();
+	    }
+
+
+	    public function isInStock($reference,$boutique) {
+	        $tmp = Stockage::select()->where([
+	            ['produit',$reference],
+	            ['boutiques',$boutique]
+	        ])->first();
+	        if(is_null($tmp)) {
+	            return false;
+	        }
+	        return true;
+	    }
+
+	    //Determinier si le produit est nouveau ou ancier
+	    public function isNewItem($libelle) {
+	        $tmp = Produits::select()->where('libelle',$libelle)->first();
+	        if(is_null($tmp)) {
+	            // le produit n'existe pas
+	            return true;
+	        }
+	        return false;
+	    }
 
 	public function organize($tab,$quantite,$option=true) {
         $test = [
@@ -37,7 +68,7 @@ trait Similarity {
                     $filterItemInfos[$key] = $this->organize($tmp,$values->quantite,false);
                 }
             }
-        
+
             return $filterItemInfos;
     }
 
@@ -120,7 +151,7 @@ trait Similarity {
 
     // public function itemsCommand($codeCommande) {
     //     $items = Sorits::select()->where('code_commande',$codeCommande);
-        
+
     // }
 
     public function getItemInfo($item) {
@@ -148,7 +179,7 @@ trait Similarity {
             }
         return $all;
         }
-        
+
     }
 
   // verifier si le nom du produit existe en bdd
@@ -158,5 +189,5 @@ trait Similarity {
         return $item;
     }
     return false;
-  }  
-} 
+  }
+}

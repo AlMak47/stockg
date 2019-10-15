@@ -136,7 +136,11 @@
 
 		});
 
-		$("#add-form #import-form").on('submit',function () {
+		$("#add-form").on('submit',function () {
+			UIkit.modal("#loading").show()
+		})
+
+		$("#import-form").on('submit',function (e) {
 			UIkit.modal("#loading").show()
 		})
 

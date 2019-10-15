@@ -116,26 +116,6 @@ class ProduitController extends Controller
         return response()->json($all);
     }
 
-    public function isInStock($reference,$boutique) {
-        $tmp = Stockage::select()->where([
-            ['produit',$reference],
-            ['boutiques',$boutique]
-        ])->first();
-        if(is_null($tmp)) {
-            return false;
-        }
-        return true;
-    }
-
-    //Determinier si le produit est nouveau ou ancier
-    public function isNewItem($libelle) {
-        $tmp = Produits::select()->where('libelle',$libelle)->first();
-        if(is_null($tmp)) {
-            // le produit n'existe pas
-            return true;
-        }
-        return false;
-    }
 
     // recherche rapide des produits
 
@@ -159,15 +139,6 @@ class ProduitController extends Controller
 
         return response()->json("undefined");
     }
-
-    public function addEntree ($produit,$boutique,$quantite) {
-        $entree = new Entree;
-        $entree->produit = $produit;
-        $entree->boutique = $boutique;
-        $entree->quantite = $quantite;
-        $entree->save();
-    }
-
 
     // VERIFICATION DU NIVEAU DANS LE STOCK DES DIFFERENTS PRODUITS
 
